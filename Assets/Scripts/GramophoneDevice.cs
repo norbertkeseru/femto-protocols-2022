@@ -1,0 +1,203 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO.Ports;
+using UnityEngine.UI;
+using Microsoft.Win32;
+
+public class GramophoneDevice : MonoBehaviour {
+
+    SerialPort stream;
+    public string Port;
+    public InputField velocityInput;
+    public float VelocityScale = 1.0f;
+    private static GramophoneDevice instance;
+    float velocity;
+	float inputVal;
+	float systemTime;
+	float inputVal2;
+    static string[] stringSeparators = new string[] { "\r\n" };
+
+    public static GramophoneDevice Instance()
+    {
+        return instance;
+    }
+
+    public static string AutodetectArduinoPort()
+    {
+        List<string> comports = new List<string>();
+        string temp;
+        RegistryKey rk1 = Registry.LocalMachine;
+        RegistryKey rk2 = rk1.OpenSubKey("SYSTEM\\CurrentControlSet\\Enum");
+        foreach (string s in rk2.GetSubKeyNames())
+        {
+            RegistryKey rk3 = rk2.OpenSubKey(s);
+            foreach (string s1 in rk3.GetSubKeyNames())
+            {
+                if (s1.Contains("VID_2341") && s1.Contains("PID_804"))
+                {
+                    RegistryKey rk4 = rk3.OpenSubKey(s1);
+                    foreach (string s2 in rk4.GetSubKeyNames())
+                    {
+                        RegistryKey rk5 = rk4.OpenSubKey(s2);
+                        if ((temp = (string)rk5.GetValue("FriendlyName")) != null)
+                        {
+                            RegistryKey rk6 = rk5.OpenSubKey("Device Parameters");
+                            if (rk6 != null && (temp = (string)rk6.GetValue("PortName")) != null)
+                            {
+                                comports.Add(temp);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (comports.Count > 0)
+        {
+            foreach (string s in SerialPort.GetPortNames())
+            {
+                if (comports.Contains(s))
+                    return s;
+            }
+        }
+
+        return "COM9";
+    }
+
+    public void inputVelicityValue (string stringVelocity)
+	{
+		VelocityScale = float.Parse(velocityInput.text);
+	}
+   
+    public float GetVelocity()
+    {
+        return - velocity * VelocityScale;
+    }
+
+    public void ResetTimer()
+    {
+        if(stream.IsOpen)
+        {
+            stream.WriteLine("R");
+        }
+
+    }
+
+    //controlls a servo if you send numbers between 0 and 5
+    public void ControlServo(int value)
+    {
+        if(value < 0 || value > 5) return;
+        if(stream.IsOpen)
+        {
+            stream.WriteLine(value.ToString());
+        }
+
+    }
+
+    public void ClosePort() 
+	{
+		stream.Close();
+	}
+
+    public void OpenA()
+    {
+        if(stream.IsOpen)
+        {
+            stream.WriteLine("A");
+        }
+    }
+
+    public void CloseA()
+    {
+        if(stream.IsOpen)
+        {
+            stream.WriteLine("a");
+        }
+    }
+
+    public void OpenB()
+    {
+        if(stream.IsOpen)
+        {
+            stream.WriteLine("B");
+        }
+    }
+
+    public void CloseB()
+    {
+         if(stream.IsOpen)
+        {
+            stream.WriteLine("b");
+        }       
+    }
+
+    public void OpenC()
+    {
+        if(stream.IsOpen)
+        {
+            stream.WriteLine("C");
+        }
+    }
+
+    public void CloseC()
+    {
+        if(stream.IsOpen)
+        {
+            stream.WriteLine("c");
+        }        
+    }
+
+	public float GetInputVal()
+	{
+		return inputVal;
+	}
+	
+	public float GetInputVal2()
+	{
+		return inputVal2;
+	}
+	
+	public float GetSystime()
+	{
+		return systemTime;
+	}
+
+    void Awake()
+    {
+        instance = this;
+    }
+
+    void Start ()
+    {
+        Port = AutodetectArduinoPort();
+        velocity = 0;
+        stream = new SerialPort(Port,115200);
+        stream.Open();
+		velocityInput.onEndEdit.AddListener(inputVelicityValue);
+	}
+
+	void Update ()
+    {
+        if (stream.IsOpen)
+        {
+            string value = stream.ReadExisting();
+            if(value == "") return;
+            string[] lines;
+            lines = value.Split(stringSeparators, System.StringSplitOptions.None);
+             var line = lines[lines.Length - 2];
+            string[] words;
+            words = line.Split(' ');
+			if (words.Length == 4)
+            { 
+			    systemTime = float.Parse (words [0]);
+				velocity = float.Parse (words [1]);
+				inputVal = float.Parse (words [2]);
+				inputVal2 = float.Parse (words [3]);
+				
+			}
+
+        }
+		
+	}
+}
