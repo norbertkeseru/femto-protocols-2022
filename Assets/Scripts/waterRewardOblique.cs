@@ -7,24 +7,32 @@ public class waterRewardOblique : MonoBehaviour {
 
     public GameObject Player;
     public GameObject teleportationTarget;
+
 	public Text telemetry;
+	public float licktreshold;
     public float timer;
     public float droptimer;
     public float tapOpentime;
 	public float timerPufftime;
+	public float licked;
     bool reduce = false;
 	bool dropped = false;
+
+
     private GramophoneDevice device;
+
 
     void Start()
     {
         device = GramophoneDevice.Instance();
     }
 		
+		
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+			Player.GetComponent<PositionTracking>().ResetLick();
             reduce = true;
         }
     }
@@ -38,6 +46,7 @@ public class waterRewardOblique : MonoBehaviour {
 			timer=timerPufftime; 
 			droptimer=tapOpentime;
 			Player.GetComponent<PositionTracking>().ResetLick();
+			device.CloseB();
         }
     }
 
@@ -45,27 +54,36 @@ public class waterRewardOblique : MonoBehaviour {
     {
         if (reduce == true)
         {
-            timer -= Time.deltaTime;
+		    LeftZone();
+			licked=Player.GetComponent<PositionTracking>().LickDisp();
+
+		    if (licked>licktreshold)
+            {
+			    timer=0;
+		    }
+            
+            timer -= 1 * Time.deltaTime;
             LeftZone();
         }
 		
-        if ((timer <= 0)& (dropped==false))
+        if ((timer <= 0) & (dropped==false))
         {
-            Reward();
+				Reward();
+				LeftZone();
         }
     }
-	
+
     void Reward()
     {
-        reduce = false;
+       // reduce = false;
         device.OpenB();
         Player.GetComponent<PositionTracking>().RewardHappens();
-		droptimer -= Time.deltaTime;
-		if (droptimer <= 0)
-        {
+		droptimer -= 1 * Time.deltaTime;
+		if (droptimer <= 0) {
 			device.CloseB ();
             dropped=true;
 		}
+			
     }
 
 	void LeftZone()

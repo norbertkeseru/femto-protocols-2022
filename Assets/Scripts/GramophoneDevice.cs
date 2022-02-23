@@ -72,7 +72,7 @@ public class GramophoneDevice : MonoBehaviour {
    
     public float GetVelocity()
     {
-        return - velocity * VelocityScale;
+        return -velocity * VelocityScale;
     }
 
     public void ResetTimer()

@@ -7,30 +7,30 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Metal pattern 38
-  m_Shader: {fileID: 54, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Wireframe_SingleSide_Yellow
+  m_Shader: {fileID: 4800000, guid: 14cf93795e5ae3243b924e07035cdd21, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: c935bb59d84484744ad2f0a1cbe855fc, type: 3}
-        m_Scale: {x: 3, y: 3}
+    - _HeightTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 21d79987f936d4a44b7b623c3abe4181, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Cutoff: 0.07462686
-    - _Shininess: 0.15145564
+    - _LineWidth: 2
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LineColor: {r: 0.9862069, g: 1, b: 0, a: 1}
+    - _WireColor: {r: 1, g: 0.88965523, b: 0, a: 1}
   m_BuildTextureStacks: []
