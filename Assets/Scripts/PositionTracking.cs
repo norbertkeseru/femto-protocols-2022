@@ -136,6 +136,16 @@ public class PositionTracking : MonoBehaviour {
 		return lickPuffer;
 	}
 
+	public float LickSimple()
+	{
+		return device.GetInputVal2();
+	}
+
+	public float LickDisp()
+	{
+		return lickPuffer;
+	}
+
 	public void PuffZone()
 	{
 		TeleportToTarget();
