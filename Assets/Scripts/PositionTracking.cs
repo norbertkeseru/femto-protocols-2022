@@ -23,7 +23,6 @@ public class PositionTracking : MonoBehaviour {
 	public float teleportDelta; //ennyi idot var ha all az eger, mielott teleportal
 	public bool teleporting; //checkbox, ha pipa, akkor van teleport
 	public bool velocityDepend; //sebessegfuggo teleport
-	public bool reverseDirection; //ha nincs pipa, akkor CCW az elore, ha pipa, akkor CW
 	public GameObject teleportationTarget1; //1. teleporthely
 	public GameObject teleportationTarget2; //2. teleporthely
 	public GameObject teleportationTarget3; //3. teleporthely
@@ -46,9 +45,9 @@ public class PositionTracking : MonoBehaviour {
 	private bool cloudZone = false; //0, ha nincs felho zonaban, 1 ha igen
 	[HideInInspector] public bool puffHappened = false;  //0, ha nem kap puffot, 1 ha igen
 	[HideInInspector] public bool rewardHappened = false;  //0, ha nem kap jutalmat, 1 ha igen
-	private bool sliding = false; //0, ha eppen nem csuszik, 1, ha igen
 	public DateTime localDate = DateTime.Now;
 	private Vector3 startPosition;
+	private bool sliding = false; //0, ha eppen nem csuszik, 1, ha igen
 	[SerializeField] private float slideDistance; //csuszasi tavolsag
 	[SerializeField] private float slidingSpeed; //csuszasi sebesseg
 	[SerializeField] private float speed; //karakter sebessege
@@ -62,7 +61,7 @@ public class PositionTracking : MonoBehaviour {
 		device = GramophoneDevice.Instance();
 		if (velocityDepend==true)
 		{
-			puffer.Add(Reverse()*device.GetVelocity());
+			puffer.Add(device.GetVelocity());
 		}
 		string clean=Regex.Replace(localDate+";" , @"[. :;]","");
 		writer = new StreamWriter(clean + "training" + ".csv", append: false);
@@ -194,15 +193,6 @@ public class PositionTracking : MonoBehaviour {
 			sliding = false;
 		}
 	}
-
-	public int Reverse()
-    {
-		if (!reverseDirection)
-        {
-			return -1;
-        }
-		return 1;
-    }
 	
 	public void TeleportToDefined()
 	{
@@ -320,7 +310,7 @@ public class PositionTracking : MonoBehaviour {
 		//log
 		string log = GetTimeStamp() + ";" + 
 		playerPosition + ";"  + 
-		Reverse() * device.GetVelocity () + ";" +  
+		device.GetVelocity () + ";" +  
 		puffZoneInt + ";" + 
 		leftZoneInt + ";" +
 		rightZoneInt + ";" +

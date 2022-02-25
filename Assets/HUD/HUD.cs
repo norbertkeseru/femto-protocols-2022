@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    public PositionTracking PT;
+    private PositionTracking PT;
+    private GramophoneDevice GD;
     public Image Puff;
     public Image Puff_icon;
     public Image Lick;
@@ -31,26 +32,46 @@ public class HUD : MonoBehaviour
     {
         //puff = PT.puffHappened;
         //drop = PT.rewardHappened;
-        if (Input.GetKey ("h"))
+        if (GD.GetInputVal2() != 0)
+        {
+            Lick.enabled = true;
+            Lick_icon.enabled = true;
+        }
+        else
+        {
+            Lick.enabled = false;
+            Lick_icon.enabled = false;
+        }
+
+        if (GD.OpenedA)
         {
             Puff.enabled = true;
             Puff_icon.enabled = true;
-            Lick.enabled = true;
-            Lick_icon.enabled = true;
-            Drop.enabled = true;
-            Drop_icon.enabled = true;
-            Recording.enabled = true;
-            Recording_circle.enabled = true;
-
         }
         else
         {
             Puff.enabled = false;
             Puff_icon.enabled = false;
-            Lick.enabled = false;
-            Lick_icon.enabled = false;
+        }
+
+        if(GD.OpenedB)
+        {
+            Drop.enabled = true;
+            Drop_icon.enabled = true;
+        }
+        else
+        {
             Drop.enabled = false;
             Drop_icon.enabled = false;
+        }
+        
+        if(GD.GetInputVal() != 0)
+        {
+            Recording.enabled = true;
+            Recording_circle.enabled = true;
+        }
+        else
+        {
             Recording.enabled = false;
             Recording_circle.enabled = false;
         }

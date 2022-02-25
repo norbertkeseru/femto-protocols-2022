@@ -21,7 +21,8 @@ public class teleport : MonoBehaviour
 			Debug.Log("TELEPORT");
 
 			//teleport
-			PositionTracking.GetComponent<PositionTracking>().TeleportToDefined();
+			//PositionTracking.GetComponent<PositionTracking>().TeleportToDefined();
+			Player.transform.position = teleportationTarget.transform.position;
 		}
 	}
 

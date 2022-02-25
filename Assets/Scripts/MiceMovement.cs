@@ -19,7 +19,7 @@ public class MiceMovement : MonoBehaviour {
 	{
         if (moving==true)
 		{
-			m_Rigidbody.velocity = transform.forward * PositionTracking.GetComponent<PositionTracking>().Reverse() * device.GetVelocity();
+			m_Rigidbody.velocity = transform.forward * device.GetVelocity();
 		}
 		else
 		{

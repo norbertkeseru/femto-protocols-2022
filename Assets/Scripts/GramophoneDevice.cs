@@ -17,6 +17,9 @@ public class GramophoneDevice : MonoBehaviour {
 	float systemTime;
 	float inputVal2;
     static string[] stringSeparators = new string[] { "\r\n" };
+    public bool reverseDirection;
+    [HideInInspector] public bool OpenedA;
+    [HideInInspector] public bool OpenedB;
 
     public static GramophoneDevice Instance()
     {
@@ -65,14 +68,26 @@ public class GramophoneDevice : MonoBehaviour {
         return "COM9";
     }
 
-    public void inputVelicityValue (string stringVelocity)
+    public void inputVelocityValue (string stringVelocity)
 	{
 		VelocityScale = float.Parse(velocityInput.text);
 	}
-   
+
+    public int Reverse()
+    {
+        if (reverseDirection == true)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
     public float GetVelocity()
     {
-        return -velocity * VelocityScale;
+        return -velocity * VelocityScale * Reverse();
     }
 
     public void ResetTimer()
@@ -102,14 +117,19 @@ public class GramophoneDevice : MonoBehaviour {
 
     public void OpenA()
     {
+        OpenedA = true;
+
         if(stream.IsOpen)
         {
             stream.WriteLine("A");
         }
+
     }
 
     public void CloseA()
     {
+        OpenedA = false;
+
         if(stream.IsOpen)
         {
             stream.WriteLine("a");
@@ -118,6 +138,8 @@ public class GramophoneDevice : MonoBehaviour {
 
     public void OpenB()
     {
+        OpenedB = true;
+
         if(stream.IsOpen)
         {
             stream.WriteLine("B");
@@ -126,6 +148,8 @@ public class GramophoneDevice : MonoBehaviour {
 
     public void CloseB()
     {
+        OpenedB = false;
+
          if(stream.IsOpen)
         {
             stream.WriteLine("b");
@@ -150,12 +174,12 @@ public class GramophoneDevice : MonoBehaviour {
 
 	public float GetInputVal()
 	{
-		return inputVal;
+		return inputVal;  //recording
 	}
 	
 	public float GetInputVal2()
 	{
-		return inputVal2;
+		return inputVal2;  //lick
 	}
 	
 	public float GetSystime()
@@ -174,7 +198,8 @@ public class GramophoneDevice : MonoBehaviour {
         velocity = 0;
         stream = new SerialPort(Port,115200);
         stream.Open();
-		velocityInput.onEndEdit.AddListener(inputVelicityValue);
+		velocityInput.onEndEdit.AddListener(inputVelocityValue);
+        Reverse();
 	}
 
 	void Update ()
