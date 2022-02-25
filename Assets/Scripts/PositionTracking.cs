@@ -47,17 +47,19 @@ public class PositionTracking : MonoBehaviour {
 	[HideInInspector] public bool rewardHappened = false;  //0, ha nem kap jutalmat, 1 ha igen
 	public DateTime localDate = DateTime.Now;
 	private Vector3 startPosition;
-	private bool sliding = false; //0, ha eppen nem csuszik, 1, ha igen
-	[SerializeField] private float slideDistance; //csuszasi tavolsag
+	public bool sliding = false; //0, ha eppen nem csuszik, 1, ha igen
+	[SerializeField] private float slideTime; //csuszasi tavolsag
+	private float slideTimer;
 	[SerializeField] private float slidingSpeed; //csuszasi sebesseg
 	[SerializeField] private float speed; //karakter sebessege
-	[SerializeField] private float slowdownPercentage; //(speed = speed * ((100 - slowdownPercentage)/100)
+	//[SerializeField] private float slowdownPercentage; //(speed = speed * ((100 - slowdownPercentage)/100)
 	[HideInInspector] public List <float> puffer = new List <float>();
 	
 	void Start ()
 	{
 		rng=UnityEngine.Random.Range (1,9);
 		speed = slidingSpeed;
+		slideTimer = 0;
 		device = GramophoneDevice.Instance();
 		if (velocityDepend==true)
 		{
@@ -83,7 +85,7 @@ public class PositionTracking : MonoBehaviour {
 		
 		if (sliding==true)
 		{
-			Slide(slideDistance);
+			Slide(slideTime);
 		}
 
 	 	if (Input.GetKey("escape"))
@@ -177,23 +179,47 @@ public class PositionTracking : MonoBehaviour {
 		return sum;
 	}
 
-	public void Slide(float slideDistance) //slideot ad az egernek
+	//public void Slide(float slideDistance) //slideot ad az egernek
+	//{
+	//	if (speed > 0.0001f)
+	//	{
+	//		if ((Vector3.Distance(startPosition, Player.transform.position)) > slideDistance)
+	//		{
+	//			speed *= (100 - slowdownPercentage) / 100;
+	//		}
+	//		Player.transform.Translate(new Vector3(0, 0, speed));
+	//	}
+	//	else
+	//	{
+	//		speed = 0;
+	//		sliding = false;
+	//	}
+	//}
+
+
+
+	public void Slide(float slideTime) //slideot ad az egernek
 	{
-		if (speed > 0.0001f)
-		{
-			if ((Vector3.Distance(startPosition, Player.transform.position)) > slideDistance)
-			{
-				speed *= (100 - slowdownPercentage) / 100;
-			}
+		if(slideTimer < slideTime)
+        {
+			speed = slidingSpeed - (slidingSpeed * slideTimer / slideTime);
 			Player.transform.Translate(new Vector3(0, 0, speed));
-		}
-		else
-		{
+			slideTimer += Time.deltaTime;
+        }
+        else
+        {
 			speed = 0;
 			sliding = false;
-		}
+			slideTimer = 0;
+        }
+		
 	}
-	
+
+
+
+
+
+
 	public void TeleportToDefined()
 	{
 		if (velocityDepend==true)

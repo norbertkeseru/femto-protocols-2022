@@ -4194,8 +4194,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 41655606, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: speed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 41655606, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: slideTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 41655606, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: teleporting
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 41655606, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: slidingSpeed
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 41655606, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: slideDistance
@@ -4275,7 +4287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013879097444, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 188.8
       objectReference: {fileID: 0}
     - target: {fileID: 4000013879097444, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: m_LocalRotation.w
