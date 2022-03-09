@@ -32,8 +32,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4669826807920852525}
-  - {fileID: 4669826807559255031}
   - {fileID: 4669826806053409507}
+  - {fileID: 4669826807559255031}
   - {fileID: 4669826807981784601}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PT: {fileID: 0}
+  GD: {fileID: 0}
   Puff: {fileID: 4669826807920852526}
   Puff_icon: {fileID: 4669826807336113459}
   Lick: {fileID: 4669826807559255016}
@@ -160,11 +161,11 @@ RectTransform:
   m_Children:
   - {fileID: 4669826806317159735}
   m_Father: {fileID: 4669826806033414199}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -100}
+  m_AnchoredPosition: {x: -300, y: -100}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4669826806053409509
@@ -386,11 +387,11 @@ RectTransform:
   m_Children:
   - {fileID: 4669826807951643746}
   m_Father: {fileID: 4669826806033414199}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -300, y: -100}
+  m_AnchoredPosition: {x: -100, y: -100}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4669826807559255017
