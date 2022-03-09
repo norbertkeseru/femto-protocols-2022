@@ -21,23 +21,32 @@ public class PositionTracking : MonoBehaviour {
 
 	//teleport stuff
 	public float teleportDelta; //ennyi idot var ha all az eger, mielott teleportal
+	public float teleportTimer = 0; //szamol teleportDelta-ig, majd teleport tortenik
 	public bool teleporting; //checkbox, ha pipa, akkor van teleport
 	public bool velocityDepend; //sebessegfuggo teleport
 	public GameObject teleportationTarget1; //1. teleporthely
+	public float probability1;
 	public GameObject teleportationTarget2; //2. teleporthely
+	public float probability2;
 	public GameObject teleportationTarget3; //3. teleporthely
+	public float probability3;
 	public GameObject teleportationTarget4; //4. teleporthely
+	public float probability4;
 	public GameObject teleportationTarget5; //5. teleporthely
+	public float probability5;
 	public GameObject teleportationTarget6; //6. teleporthely
+	public float probability6;
 	public GameObject teleportationTarget7; //7. teleporthely
+	public float probability7;
 	public GameObject teleportationTarget8; //8. teleporthely
-	[HideInInspector] public float teleportTimer = 0; //szamol teleportDelta-ig, majd teleport tortenik
-	[HideInInspector] public int rng = 0; //1-9 kozott vesz fel random integert
+	public float probability8;
+	public int rng = 0; //1-9 kozott vesz fel random integert
 	[HideInInspector] public bool teleportEvent = false; //logolasnal 1-ha teleport van eppen es 0 egyebkent
-
 	public float lickPuffer = 0; // a zonaban hanyszor nyalogatott, amig bent volt
 	public float lickDelta = 0; //osszesen hanyszor nyalogatott
 	public float lickLock = 0; //0, ha nincs nem nyalogat, 1 ha igen
+	public float lickTime = 0; //nyalogatás óta eltelt idő
+	public float teleportAfterLick = 0; //ennyi idő után teleportál nyalogatás után
 	private bool puffZone = false; //0, ha nincs puff zonaban, 1 ha igen
 	private bool leftZone = false; //0, ha nincs bal zonaban, 1 ha igen
 	private bool rightZone = false; //0, ha nincs jobb zonaban, 1 ha igen
@@ -68,6 +77,7 @@ public class PositionTracking : MonoBehaviour {
 		string clean=Regex.Replace(localDate+";" , @"[. :;]","");
 		writer = new StreamWriter(clean + "training" + ".csv", append: false);
 		writer.WriteLine("time;position;velocity;aversive;left;right;black;cloud;teleport;port_A;port_B;port_C;Trigger;Input2;lickLock;Lick;lickDelta;Systime;");
+		probability8 = 100 - (probability1 + probability2 + probability3 + probability4 + probability5 + probability6 + probability7);
 	}
 	void LateUpdate ()
 	{
@@ -77,7 +87,7 @@ public class PositionTracking : MonoBehaviour {
         } 
 		else
 		{
-			if ((puffZone==true)||(leftZone==true)||(rightZone==true))
+			if ((puffZone==true)||(leftZone==true)||(rightZone==true)||(cloudZone==true))
 			{
 				TeleportToTarget ();
 			}
@@ -85,7 +95,7 @@ public class PositionTracking : MonoBehaviour {
 		
 		if (sliding==true)
 		{
-			Slide(slideTime);
+			Slide();
 		}
 
 	 	if (Input.GetKey("escape"))
@@ -95,6 +105,8 @@ public class PositionTracking : MonoBehaviour {
         }
 
 		WritePositionToCSV(Player);
+
+		lickTime += Time.deltaTime;
 	}
 
 	public void LeftZone()
@@ -129,10 +141,11 @@ public class PositionTracking : MonoBehaviour {
 	
 	public float Lick()
 	{
-		if (lickLock != device.GetInputVal2())
+		if (lickLock < device.GetInputVal2())
 		{
 			lickPuffer++;
 			lickDelta++;
+			lickTime = 0;
 		}
 		return lickPuffer;
 	}
@@ -198,7 +211,7 @@ public class PositionTracking : MonoBehaviour {
 
 
 
-	public void Slide(float slideTime) //slideot ad az egernek
+	public void Slide() //slideot ad az egernek
 	{
 		if(slideTimer < slideTime)
         {
@@ -216,7 +229,40 @@ public class PositionTracking : MonoBehaviour {
 	}
 
 
+	int GetRandomValue()
+	{
+		float rand = UnityEngine.Random.value;
+		if (rand <= probability1 / 100)
+        {
+			return 1;
+		}
+		if (rand <= (probability1 + probability2) / 100)
+		{
+			return 2;
+		}
+		if (rand <= (probability1 + probability2 + probability3) / 100)
+		{
+			return 3;
+		}
+		if (rand <= (probability1 + probability2 + probability3 + probability4) / 100)
+		{
+			return 4;
+		}
+		if (rand <= (probability1 + probability2 + probability3 + probability4 + probability5) / 100)
+		{
+			return 5;
+		}
+		if (rand <= (probability1 + probability2 + probability3 + probability4 + probability5 + probability6) / 100)
+		{
+			return 6;
+		}
+		if (rand <= (probability1 + probability2 + probability3 + probability4 + probability5 + probability6 + probability7) / 100)
+		{
+			return 7;
+		}
 
+		return 8;
+	}
 
 
 
@@ -269,9 +315,9 @@ public class PositionTracking : MonoBehaviour {
 			teleportTimer += Time.deltaTime;
 		}
 
-		rng=UnityEngine.Random.Range (1,9);
-
-		if (teleportTimer >= teleportDelta)
+		rng = GetRandomValue();
+		
+		if (teleportTimer >= teleportDelta && lickTime >= teleportAfterLick)
 		{
 			switch (rng)
 			{

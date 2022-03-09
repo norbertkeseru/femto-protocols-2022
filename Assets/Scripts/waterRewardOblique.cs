@@ -57,7 +57,7 @@ public class waterRewardOblique : MonoBehaviour {
 		    LeftZone();
 			licked=Player.GetComponent<PositionTracking>().LickDisp();
 
-		    if (licked>licktreshold)
+		    if (licked>=licktreshold)
             {
 			    timer=0;
 		    }

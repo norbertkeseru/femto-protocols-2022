@@ -113,7 +113,9 @@ public class GramophoneDevice : MonoBehaviour {
     public void ClosePort() 
 	{
 		stream.Close();
-	}
+        OpenedA = false;
+        OpenedB = false;
+    }
 
     public void OpenA()
     {

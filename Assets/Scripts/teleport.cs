@@ -6,7 +6,7 @@ public class teleport : MonoBehaviour
 {
 	public GameObject Player;
 	public GameObject teleportationTarget;
-	private PositionTracking PT;
+	public PositionTracking PT;
 
 	bool reduce = false;
 
@@ -23,7 +23,7 @@ public class teleport : MonoBehaviour
 			//teleport
 			//PositionTracking.GetComponent<PositionTracking>().TeleportToDefined();
 			Player.transform.position = teleportationTarget.transform.position;
-			PT.sliding = true;
+			
 		}
 	}
 
@@ -34,6 +34,7 @@ public class teleport : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			reduce = false;
+			PT.sliding = true;
 		}
 	}
 }

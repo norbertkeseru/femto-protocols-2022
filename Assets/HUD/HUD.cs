@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class HUD : MonoBehaviour
 {
-    private PositionTracking PT;
-    private GramophoneDevice GD;
+    public GramophoneDevice GD;
     public Image Puff;
     public Image Puff_icon;
     public Image Lick;
@@ -16,10 +16,6 @@ public class HUD : MonoBehaviour
     public Image Recording;
     public Image Recording_circle;
     Color32 trueColor = new Color32(0, 255, 0, 100);
-    [HideInInspector] public bool puff;
-    [HideInInspector] public bool lick;
-    [HideInInspector] public bool drop;
-    [HideInInspector] public bool recording;
 
     void Start()
     {
@@ -30,9 +26,7 @@ public class HUD : MonoBehaviour
 
     void Update()
     {
-        //puff = PT.puffHappened;
-        //drop = PT.rewardHappened;
-        if (GD.GetInputVal2() != 0)
+        if (GD.GetInputVal2() == 1)
         {
             Lick.enabled = true;
             Lick_icon.enabled = true;
@@ -65,7 +59,7 @@ public class HUD : MonoBehaviour
             Drop_icon.enabled = false;
         }
         
-        if(GD.GetInputVal() != 0)
+        if(GD.GetInputVal() > 0)
         {
             Recording.enabled = true;
             Recording_circle.enabled = true;
@@ -75,24 +69,5 @@ public class HUD : MonoBehaviour
             Recording.enabled = false;
             Recording_circle.enabled = false;
         }
-
-        //if (puff == true)
-        //{
-        //    Puff.enabled = true;
-        //    Puff.color = trueColor;
-        //}
-        //else
-        //{
-        //    Puff.enabled = false;
-        //}
-
-        //if (drop == true)
-        //{
-        //    Drop.color = trueColor;
-        //}
-        //else
-        //{
-        //    Drop.color = defaultColor;
-        //}
     }
 }
