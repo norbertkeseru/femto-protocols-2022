@@ -1,4 +1,4 @@
-Ôªøusing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -6,9 +6,11 @@ using System.Linq;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using UnityEngine.SceneManagement;
 
 
-public class PositionTracking : MonoBehaviour {
+public class PositionTracking : MonoBehaviour
+{
 
 	//jatekos
 	public GameObject Player;
@@ -45,8 +47,10 @@ public class PositionTracking : MonoBehaviour {
 	public float lickPuffer = 0; // a zonaban hanyszor nyalogatott, amig bent volt
 	public float lickDelta = 0; //osszesen hanyszor nyalogatott
 	public float lickLock = 0; //0, ha nincs nem nyalogat, 1 ha igen
-	public float lickTime = 0; //nyalogat√°s √≥ta eltelt id≈ë
-	public float teleportAfterLick = 0; //ennyi id≈ë ut√°n teleport√°l nyalogat√°s ut√°n
+	public float lickTime = 0; //nyalogat·s Ûta eltelt idı
+	public float teleportAfterLick = 0; //ennyi idı ut·n teleport·l nyalogat·s ut·n
+	public float moveTime = 0; //fut·s Ûta eltelt idı
+	public float teleportAfterNoMove = 0; //ennyi idı ut·n teleport·l fut·s ut·n
 	private bool puffZone = false; //0, ha nincs puff zonaban, 1 ha igen
 	private bool leftZone = false; //0, ha nincs bal zonaban, 1 ha igen
 	private bool rightZone = false; //0, ha nincs jobb zonaban, 1 ha igen
@@ -61,52 +65,51 @@ public class PositionTracking : MonoBehaviour {
 	private float slideTimer;
 	[SerializeField] private float slidingSpeed; //csuszasi sebesseg
 	[SerializeField] private float speed; //karakter sebessege
-	//[SerializeField] private float slowdownPercentage; //(speed = speed * ((100 - slowdownPercentage)/100)
-	[HideInInspector] public List <float> puffer = new List <float>();
-	
-	void Start ()
+	[HideInInspector] public List<float> puffer = new List<float>();
+	private Scene scene;
+
+	void Start()
 	{
-		rng=UnityEngine.Random.Range (1,9);
+		rng = UnityEngine.Random.Range(1, 9);
 		speed = slidingSpeed;
 		slideTimer = 0;
 		device = GramophoneDevice.Instance();
-		if (velocityDepend==true)
-		{
+		//if (velocityDepend == true)
+		//{
 			puffer.Add(device.GetVelocity());
-		}
-		string clean=Regex.Replace(localDate+";" , @"[. :;]","");
+		//}
+		string clean = Regex.Replace(localDate + ";", @"[. :;]", "");
 		writer = new StreamWriter(clean + "training" + ".csv", append: false);
 		writer.WriteLine("time;position;velocity;aversive;left;right;black;cloud;teleport;port_A;port_B;port_C;Trigger;Input2;lickLock;Lick;lickDelta;Systime;");
 		probability8 = 100 - (probability1 + probability2 + probability3 + probability4 + probability5 + probability6 + probability7);
+		scene = SceneManager.GetActiveScene();
 	}
-	void LateUpdate ()
+	void LateUpdate()
 	{
-		if (teleporting==true)
+		if (teleporting == true)
 		{
-			TeleportToTarget ();
-        } 
+			TeleportToTarget();
+		}
 		else
 		{
-			if ((puffZone==true)||(leftZone==true)||(rightZone==true)||(cloudZone==true))
+			if ((puffZone == true) || (leftZone == true) || (rightZone == true) || (cloudZone == true))
 			{
-				TeleportToTarget ();
+				TeleportToTarget();
 			}
 		}
-		
-		if (sliding==true)
+
+		if (sliding == true)
 		{
 			Slide();
 		}
 
-	 	if (Input.GetKey("escape"))
-        {
-            Application.Quit();
+		if (Input.GetKey("escape"))
+		{
+			Application.Quit();
 			device.ClosePort();
-        }
+		}
 
 		WritePositionToCSV(Player);
-
-		lickTime += Time.deltaTime;
 	}
 
 	public void LeftZone()
@@ -118,7 +121,7 @@ public class PositionTracking : MonoBehaviour {
 	{
 		rightZone = true;
 	}
-	
+
 	public void BlackZone()
 	{
 		blackZone = true;
@@ -133,19 +136,22 @@ public class PositionTracking : MonoBehaviour {
 	{
 		lickPuffer = 0;
 	}
-	
+
 	public void RewardHappens()
 	{
-		rewardHappened = true; 
+		rewardHappened = true;
 	}
-	
+
 	public float Lick()
 	{
 		if (lickLock < device.GetInputVal2())
 		{
 			lickPuffer++;
 			lickDelta++;
-			lickTime = 0;
+			if (scene.name == "Reward")
+			{
+				lickTime = 0;
+			}
 		}
 		return lickPuffer;
 	}
@@ -169,7 +175,7 @@ public class PositionTracking : MonoBehaviour {
 	public void PuffHappens()
 	{
 		puffZone = true;
-		puffHappened = true; 
+		puffHappened = true;
 	}
 
 	public string GetTimeStamp()
@@ -179,16 +185,16 @@ public class PositionTracking : MonoBehaviour {
 
 	public float VelocityIntegral() //megnezi, hogy az utolso 100 sebessegerteknek mi az atlaga
 	{
-		float sum=0;
+		float sum = 0;
 		int pufferlength = puffer.Count;
 		int skipped = 0;
 		int window = 100;
 		if (pufferlength > window)
-        {
+		{
 			pufferlength = window;
 		}
-		skipped=puffer.Count-window;
-		sum = puffer.Skip(skipped).Take (pufferlength).Sum ()/window;
+		skipped = puffer.Count - window;
+		sum = puffer.Skip(skipped).Take(pufferlength).Sum() / window;
 		return sum;
 	}
 
@@ -213,19 +219,19 @@ public class PositionTracking : MonoBehaviour {
 
 	public void Slide() //slideot ad az egernek
 	{
-		if(slideTimer < slideTime)
-        {
+		if (slideTimer < slideTime)
+		{
 			speed = slidingSpeed - (slidingSpeed * slideTimer / slideTime);
 			Player.transform.Translate(new Vector3(0, 0, speed));
 			slideTimer += Time.deltaTime;
-        }
-        else
-        {
+		}
+		else
+		{
 			speed = 0;
 			sliding = false;
 			slideTimer = 0;
-        }
-		
+		}
+
 	}
 
 
@@ -233,7 +239,7 @@ public class PositionTracking : MonoBehaviour {
 	{
 		float rand = UnityEngine.Random.value;
 		if (rand <= probability1 / 100)
-        {
+		{
 			return 1;
 		}
 		if (rand <= (probability1 + probability2) / 100)
@@ -268,9 +274,9 @@ public class PositionTracking : MonoBehaviour {
 
 	public void TeleportToDefined()
 	{
-		if (velocityDepend==true)
+		if (velocityDepend == true)
 		{
-			if ((VelocityIntegral () < 1))
+			if (VelocityIntegral() < 1)
 			{
 				teleportTimer += Time.deltaTime;
 			}
@@ -278,7 +284,7 @@ public class PositionTracking : MonoBehaviour {
 			{
 				teleportTimer = 0;
 			}
-		
+
 		}
 		else
 		{
@@ -293,31 +299,44 @@ public class PositionTracking : MonoBehaviour {
 			startPosition = Player.transform.position;
 			teleportTimer = 0;
 			speed = slidingSpeed;
-		} 
+		}
 	}
 
 	public void TeleportToTarget()
 	{
-		if (velocityDepend==true)
+		if (velocityDepend == true)
 		{
-			if ((VelocityIntegral () < 1))
+			if ((VelocityIntegral() < 1))
 			{
 				teleportTimer += Time.deltaTime;
-			} 
+			}
 			else
 			{
 				teleportTimer = 0;
 			}
-		
+
 		}
 		else
 		{
 			teleportTimer += Time.deltaTime;
+
+			if (scene.name == "Discrimination")
+			{
+				if (VelocityIntegral() > 10)
+				{
+					moveTime = 0;
+				}
+				else
+				{
+					moveTime += Time.deltaTime;
+				}
+			}
+
 		}
 
 		rng = GetRandomValue();
-		
-		if (teleportTimer >= teleportDelta && lickTime >= teleportAfterLick)
+
+		if (teleportTimer >= teleportDelta && moveTime >= teleportAfterNoMove)
 		{
 			switch (rng)
 			{
@@ -344,11 +363,11 @@ public class PositionTracking : MonoBehaviour {
 				case 6:
 					Player.transform.position = teleportationTarget6.transform.position;
 					break;
-				
+
 				case 7:
 					Player.transform.position = teleportationTarget7.transform.position;
 					break;
-				
+
 				case 8:
 					Player.transform.position = teleportationTarget8.transform.position;
 					break;
@@ -358,49 +377,52 @@ public class PositionTracking : MonoBehaviour {
 			startPosition = Player.transform.position;
 			teleportTimer = 0;
 			speed = slidingSpeed;
-		} 
-	
+		}
+
 	}
 
 	public void WritePositionToCSV(GameObject Player)
 	{
-		if (velocityDepend== true)
-		{
-			puffer.Add (Mathf.Abs (device.GetVelocity ()));
-		}
-		int puffZoneInt = Convert.ToInt16 (puffZone);
-		int leftZoneInt = Convert.ToInt16 (leftZone);
-		int rightZoneInt = Convert.ToInt16 (rightZone);
-		int blackZoneInt = Convert.ToInt16 (blackZone);
-		int cloudZoneInt = Convert.ToInt16 (cloudZone);
-		int puffHappenedInt = Convert.ToInt16 (puffHappened);
-		int teleportEventInt = Convert.ToInt16 (teleportEvent);
-		int rewardHappenedInt = Convert.ToInt16 (rewardHappened);
-		int lickLockInt = Convert.ToInt16 (lickLock);
+		//if (velocityDepend == true)
+		//{
+			puffer.Add(Mathf.Abs(device.GetVelocity()));
+		//}
+		int puffZoneInt = Convert.ToInt16(puffZone);
+		int leftZoneInt = Convert.ToInt16(leftZone);
+		int rightZoneInt = Convert.ToInt16(rightZone);
+		int blackZoneInt = Convert.ToInt16(blackZone);
+		int cloudZoneInt = Convert.ToInt16(cloudZone);
+		int puffHappenedInt = Convert.ToInt16(puffHappened);
+		int teleportEventInt = Convert.ToInt16(teleportEvent);
+		int rewardHappenedInt = Convert.ToInt16(rewardHappened);
+		int lickLockInt = Convert.ToInt16(lickLock);
 		double playerPosition = Convert.ToDouble(Player.transform.localPosition.z);
-		
+
 		//log
-		string log = GetTimeStamp() + ";" + 
-		playerPosition + ";"  + 
-		device.GetVelocity () + ";" +  
-		puffZoneInt + ";" + 
+		string log = GetTimeStamp() + ";" +
+		playerPosition + ";" +
+		device.GetVelocity() + ";" +
+		puffZoneInt + ";" +
 		leftZoneInt + ";" +
 		rightZoneInt + ";" +
 		blackZoneInt + ";" +
-		cloudZoneInt + ";" + 
+		cloudZoneInt + ";" +
 		teleportEventInt + ";" +
-		puffHappenedInt +";" +
-		rewardHappenedInt +";" + 
-		0  +";" +
-		device.GetInputVal()  +";" +
-		device.GetInputVal2()  +";" +
-		lickLockInt +";" +  
-		Lick()+ ";" +
-		lickDelta  +";" + 
-		device.GetSystime();
+		puffHappenedInt + ";" +
+		rewardHappenedInt + ";" +
+		0 + ";" +
+		device.GetInputVal() + ";" +
+		device.GetInputVal2() + ";" +
+		lickLockInt + ";" +
+		Lick() + ";" +
+		lickDelta + ";" +
+		device.GetSystime() + ";" +
+		VelocityIntegral() + ";" +
+		moveTime + ";" +
+		cloudZone;
 
-		lickLock=device.GetInputVal2();
-		teleportEvent = false; 
+		lickLock = device.GetInputVal2();
+		teleportEvent = false;
 		Debug.Log(log);
 		writer.WriteLine(log);
 		puffHappened = false;
