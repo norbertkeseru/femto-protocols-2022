@@ -90,4 +90,15 @@ public class waterRewardOblique : MonoBehaviour {
     {
 		Player.GetComponent<PositionTracking>().LeftZone();
 	}
+
+    public void RewardReset()
+    {
+        reduce = false;
+        dropped = false;
+        timer = timerPufftime;
+        droptimer = tapOpentime;
+        Player.GetComponent<PositionTracking>().ResetLick();
+        device.CloseB();
+        reduce = true;
+    }
 }

@@ -49,8 +49,8 @@ Shader "Unlit/Stripes_45"
 			fixed4 frag(v2f i) : SV_Target
 			{
 				dir = _Direction / 90;
-				sn1 = _Stripenumber / cos(dir * 3.1415926535897931 / 2);
-				sn2 = _Stripenumber / sin(dir * 3.1415926535897931 / 2);
+				sn1 = _Stripenumber / cos(dir * 3.14159265358979 / 2);
+				sn2 = _Stripenumber / sin(dir * 3.14159265358979 / 2);
 				if (dir < 0.5)
 				{
 					pos = lerp(i.uv.x * sn1, i.uv.y * sn1 / 5, dir);

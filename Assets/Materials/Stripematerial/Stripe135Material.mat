@@ -71,7 +71,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Stripenumber: 10
+    - _Stripenumber: 9.9
     - _Tiling: 1
     - _UVSec: 0
     - _ZWrite: 1

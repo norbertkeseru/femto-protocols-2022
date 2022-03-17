@@ -978,7 +978,7 @@ Transform:
   m_LocalScale: {x: 3, y: 5, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1271641787}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &365460900
 BoxCollider:
@@ -1145,7 +1145,7 @@ Transform:
   m_LocalScale: {x: 3, y: 5, z: 0.1}
   m_Children: []
   m_Father: {fileID: 1271641787}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &434269565
 BoxCollider:
@@ -1736,7 +1736,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1271641787}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &738884726
 GameObject:
@@ -2501,8 +2501,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862880113}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 112.5}
-  m_LocalScale: {x: 3, y: 5, z: 250}
+  m_LocalPosition: {x: 0, y: 0, z: 25}
+  m_LocalScale: {x: 3, y: 5, z: 75}
   m_Children: []
   m_Father: {fileID: 1271641787}
   m_RootOrder: 0
@@ -2588,7 +2588,7 @@ MonoBehaviour:
   timer: 4
   droptimer: 0.05
   tapOpentime: 0.05
-  timerPufftime: 0
+  timerPufftime: 4
   licked: 0
 --- !u!1 &864099870
 GameObject:
@@ -3106,6 +3106,117 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6409805444345024656, guid: b5f63238a79a72148b55ee5cf23a83d7, type: 3}
   m_PrefabInstance: {fileID: 998895075}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1022549484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1022549485}
+  - component: {fileID: 1022549489}
+  - component: {fileID: 1022549488}
+  - component: {fileID: 1022549487}
+  - component: {fileID: 1022549486}
+  m_Layer: 13
+  m_Name: Reward_cloud_zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1022549485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022549484}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 150}
+  m_LocalScale: {x: 3, y: 5, z: 175}
+  m_Children: []
+  m_Father: {fileID: 1271641787}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1022549486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022549484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56cae1ea579666a4bb60516bf193dcab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1587215349}
+  teleportationTarget: {fileID: 0}
+  telemetry: {fileID: 0}
+--- !u!65 &1022549487
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022549484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1022549488
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022549484}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d8e7d50e746f26441bf5e213538529cc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1022549489
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022549484}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1045441055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8521519896419812609, guid: 5c76c17369e435247894e7019f62a387, type: 3}
@@ -3643,6 +3754,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 862880114}
+  - {fileID: 1022549485}
   - {fileID: 365460899}
   - {fileID: 1999934957}
   - {fileID: 434269564}
@@ -4112,110 +4224,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: speed
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: sliding
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: slideTime
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: teleporting
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: probability1
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: probability2
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: probability3
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: probability4
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: probability5
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: probability6
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: probability7
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: probability8
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: slidingSpeed
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: slideDistance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: teleportDelta
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: velocityDepend
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: reverseDirection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: teleportAfterLick
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: teleportationTarget1
-      value: 
-      objectReference: {fileID: 597569983}
-    - target: {fileID: 0}
-      propertyPath: teleportationTarget2
-      value: 
-      objectReference: {fileID: 1999934956}
-    - target: {fileID: 0}
-      propertyPath: teleportationTarget3
-      value: 
-      objectReference: {fileID: 1153487720}
-    - target: {fileID: 0}
-      propertyPath: teleportationTarget4
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: teleportationTarget5
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: teleportationTarget6
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: teleportationTarget7
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: teleportationTarget8
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 218773757, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -4238,7 +4246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013879097444, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: 21.5
       objectReference: {fileID: 0}
     - target: {fileID: 4000013879097444, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4300,15 +4308,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1587215349}
-  teleportDelta: 12
+  teleportDelta: 8
   teleportTimer: 0
   teleporting: 0
   velocityDepend: 1
-  teleportationTarget1: {fileID: 0}
+  teleportationTarget1: {fileID: 597569983}
   probability1: 0
-  teleportationTarget2: {fileID: 0}
-  probability2: 0
-  teleportationTarget3: {fileID: 0}
+  teleportationTarget2: {fileID: 1999934956}
+  probability2: 100
+  teleportationTarget3: {fileID: 1153487720}
   probability3: 0
   teleportationTarget4: {fileID: 0}
   probability4: 0
@@ -4327,12 +4335,14 @@ MonoBehaviour:
   lickLock: 0
   lickTime: 0
   teleportAfterLick: 0
+  moveTime: 0
+  teleportAfterNoMove: 0
+  RewardZone: {fileID: 862880113}
   puffHappened: 0
   rewardHappened: 0
   sliding: 0
   slideTime: 0
   slidingSpeed: 0.2
-  speed: 0.1
   puffer: []
 --- !u!1001 &1628493717
 PrefabInstance:
@@ -5140,7 +5150,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1271641787}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2006155515
 PrefabInstance:

@@ -53,6 +53,7 @@ public class PositionTracking : MonoBehaviour
 	public float teleportAfterNoMove = 0; //ennyi idõ után teleportál futás után
 	private bool puffZone = false; //0, ha nincs puff zonaban, 1 ha igen
 	private bool leftZone = false; //0, ha nincs bal zonaban, 1 ha igen
+	public GameObject RewardZone;
 	private bool rightZone = false; //0, ha nincs jobb zonaban, 1 ha igen
 	private bool blackZone = false; //0, ha nincs fekete zonaban, 1 ha igen
 	private bool cloudZone = false; //0, ha nincs felho zonaban, 1 ha igen
@@ -64,7 +65,7 @@ public class PositionTracking : MonoBehaviour
 	[SerializeField] private float slideTime; //csuszasi tavolsag
 	private float slideTimer;
 	[SerializeField] private float slidingSpeed; //csuszasi sebesseg
-	[SerializeField] private float speed; //karakter sebessege
+	private float speed; //karakter sebessege
 	[HideInInspector] public List<float> puffer = new List<float>();
 	private Scene scene;
 
@@ -84,6 +85,7 @@ public class PositionTracking : MonoBehaviour
 		probability8 = 100 - (probability1 + probability2 + probability3 + probability4 + probability5 + probability6 + probability7);
 		scene = SceneManager.GetActiveScene();
 	}
+
 	void LateUpdate()
 	{
 		if (teleporting == true)
@@ -377,6 +379,7 @@ public class PositionTracking : MonoBehaviour
 			startPosition = Player.transform.position;
 			teleportTimer = 0;
 			speed = slidingSpeed;
+			RewardZone.GetComponent<waterRewardOblique>().RewardReset();
 		}
 
 	}
@@ -416,10 +419,7 @@ public class PositionTracking : MonoBehaviour
 		lickLockInt + ";" +
 		Lick() + ";" +
 		lickDelta + ";" +
-		device.GetSystime() + ";" +
-		VelocityIntegral() + ";" +
-		moveTime + ";" +
-		cloudZone;
+		device.GetSystime();
 
 		lickLock = device.GetInputVal2();
 		teleportEvent = false;
