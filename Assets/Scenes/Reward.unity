@@ -2584,7 +2584,7 @@ MonoBehaviour:
   Player: {fileID: 1587215349}
   teleportationTarget: {fileID: 597569983}
   telemetry: {fileID: 0}
-  licktreshold: 1
+  licktreshold: 3
   timer: 4
   droptimer: 0.05
   tapOpentime: 0.05
