@@ -332,13 +332,18 @@ public class PositionTracking : MonoBehaviour
 				{
 					moveTime += Time.deltaTime;
 				}
-			}
 
-		}
+			}
+            if (scene.name == "Reward")
+            {
+                lickTime += Time.deltaTime;
+            }
+
+        }
 
 		rng = GetRandomValue();
 
-		if (teleportTimer >= teleportDelta && moveTime >= teleportAfterNoMove)
+		if (teleportTimer >= teleportDelta && lickTime >= teleportAfterLick)
 		{
 			switch (rng)
 			{
