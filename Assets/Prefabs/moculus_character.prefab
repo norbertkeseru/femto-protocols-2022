@@ -576,7 +576,6 @@ GameObject:
   - component: {fileID: 114721672624061074}
   - component: {fileID: 41655605}
   - component: {fileID: 41655602}
-  - component: {fileID: 41655606}
   - component: {fileID: 41655607}
   m_Layer: 8
   m_Name: moculus_character
@@ -660,44 +659,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &41655606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000011749492562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec810486b0ff5274e884d549e56d61d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1000011749492562}
-  teleportDelta: 12
-  teleporting: 0
-  velocityDepend: 1
-  reverseDirection: 0
-  teleportationTarget1: {fileID: 0}
-  teleportationTarget2: {fileID: 0}
-  teleportationTarget3: {fileID: 0}
-  teleportationTarget4: {fileID: 0}
-  teleportationTarget5: {fileID: 0}
-  teleportationTarget6: {fileID: 0}
-  teleportationTarget7: {fileID: 0}
-  teleportationTarget8: {fileID: 0}
-  teleportTimer: 0
-  rng: 0
-  teleportEvent: 0
-  lickPuffer: 0
-  lickDelta: 0
-  lickLock: 0
-  puffHappened: 0
-  rewardHappened: 0
-  slideDistance: 0
-  slidingSpeed: 0.2
-  speed: 0.1
-  slowdownPercentage: 10
-  puffer: []
 --- !u!114 &41655607
 MonoBehaviour:
   m_ObjectHideFlags: 0
