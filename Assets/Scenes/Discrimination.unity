@@ -5632,13 +5632,13 @@ MonoBehaviour:
   teleportDelta: 12
   teleportTimer: 0
   teleporting: 0
-  velocityDepend: 0
+  velocityDepend: 1
   teleportationTarget1: {fileID: 249080570}
-  probability1: 0
+  probability1: 30
   teleportationTarget2: {fileID: 1479605181}
-  probability2: 50
+  probability2: 30
   teleportationTarget3: {fileID: 1497915247}
-  probability3: 50
+  probability3: 40
   teleportationTarget4: {fileID: 0}
   probability4: 0
   teleportationTarget5: {fileID: 0}
@@ -5655,15 +5655,14 @@ MonoBehaviour:
   lickDelta: 0
   lickLock: 0
   lickTime: 0
-  teleportAfterLick: 6
+  teleportAfterLick: 0
   moveTime: 0
-  teleportAfterNoMove: 5
+  teleportAfterNoMove: 0
   puffHappened: 0
   rewardHappened: 0
-  sliding: 1
-  slideTime: 0
-  slidingSpeed: 0.2
-  speed: 0.1
+  sliding: 0
+  slideTime: 0.2
+  slidingSpeed: 0
   puffer: []
 --- !u!1001 &1936246694
 PrefabInstance:
