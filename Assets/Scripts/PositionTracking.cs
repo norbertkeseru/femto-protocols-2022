@@ -82,7 +82,7 @@ public class PositionTracking : MonoBehaviour
 		//}
 		string clean = Regex.Replace(localDate + ";", @"[. :;]", "");
 		writer = new StreamWriter(clean + "training" + ".csv", append: false);
-		writer.WriteLine("time;position;velocity;aversive;left;right;black;cloud;teleport;port_A;port_B;port_C;Trigger;Input2;lickLock;Lick;lickDelta;Systime;");
+		writer.WriteLine("time;position;velocity;aversive;left;right;black;cloud;mismatch;teleport;port_A;port_B;port_C;Trigger;Input2;lickLock;Lick;lickDelta;Systime;");
 		probability8 = 100 - (probability1 + probability2 + probability3 + probability4 + probability5 + probability6 + probability7);
 		scene = SceneManager.GetActiveScene();
 	}
@@ -405,6 +405,7 @@ public class PositionTracking : MonoBehaviour
 		int rightZoneInt = Convert.ToInt16(rightZone);
 		int blackZoneInt = Convert.ToInt16(blackZone);
 		int cloudZoneInt = Convert.ToInt16(cloudZone);
+		int mismatchZoneInt = Convert.ToInt16(mismatchZone);
 		int puffHappenedInt = Convert.ToInt16(puffHappened);
 		int teleportEventInt = Convert.ToInt16(teleportEvent);
 		int rewardHappenedInt = Convert.ToInt16(rewardHappened);
@@ -420,6 +421,7 @@ public class PositionTracking : MonoBehaviour
 		rightZoneInt + ";" +
 		blackZoneInt + ";" +
 		cloudZoneInt + ";" +
+		mismatchZoneInt + ";" +
 		teleportEventInt + ";" +
 		puffHappenedInt + ";" +
 		rewardHappenedInt + ";" +
@@ -441,6 +443,7 @@ public class PositionTracking : MonoBehaviour
 		rightZone = false;
 		blackZone = false;
 		cloudZone = false;
+		mismatchZone = false;
 		rewardHappened = false;
 	}
 }

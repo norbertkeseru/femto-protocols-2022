@@ -255,25 +255,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1000011749492562, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
   m_PrefabInstance: {fileID: 114463663}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &140706460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 140706459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e98ab4e7eacb13241981439228d5fada, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 140706459}
-  teleportationTarget: {fileID: 0}
-  telemetry: {fileID: 0}
-  timer: 0
-  droptimer: 0
-  tapOpentime: 0
-  timerPufftime: 0
 --- !u!1 &206545117
 GameObject:
   m_ObjectHideFlags: 0

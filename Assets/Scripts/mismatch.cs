@@ -87,7 +87,8 @@ public class mismatch : MonoBehaviour
 		Player.GetComponent<MiceMovement>().Restart();
 		yield return new WaitForSecondsRealtime(rewardTime);
         device.OpenB();
-        yield return new WaitForSecondsRealtime(dropTimer);
+		Player.GetComponent<PositionTracking>().RewardHappens();
+		yield return new WaitForSecondsRealtime(dropTimer);
 		device.CloseB();
 	}
 }
