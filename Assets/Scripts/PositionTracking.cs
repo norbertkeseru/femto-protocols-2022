@@ -57,6 +57,7 @@ public class PositionTracking : MonoBehaviour
 	private bool rightZone = false; //0, ha nincs jobb zonaban, 1 ha igen
 	private bool blackZone = false; //0, ha nincs fekete zonaban, 1 ha igen
 	private bool cloudZone = false; //0, ha nincs felho zonaban, 1 ha igen
+	private bool mismatchZone = false; //0, ha nincs mismatch zonaban, 1 ha igen
 	[HideInInspector] public bool puffHappened = false;  //0, ha nem kap puffot, 1 ha igen
 	[HideInInspector] public bool rewardHappened = false;  //0, ha nem kap jutalmat, 1 ha igen
 	public DateTime localDate = DateTime.Now;
@@ -94,7 +95,7 @@ public class PositionTracking : MonoBehaviour
 		}
 		else
 		{
-			if ((puffZone == true) || (leftZone == true) || (rightZone == true) || (cloudZone == true))
+			if ((puffZone == true) || (leftZone == true) || (rightZone == true) || (cloudZone == true) || (mismatchZone == true))
 			{
 				TeleportToTarget();
 			}
@@ -132,6 +133,10 @@ public class PositionTracking : MonoBehaviour
 	public void CloudZone()
 	{
 		cloudZone = true;
+	}
+	public void MismatchZone()
+	{
+		mismatchZone = true;
 	}
 
 	public void ResetLick()
@@ -322,7 +327,7 @@ public class PositionTracking : MonoBehaviour
 		{
 			teleportTimer += Time.deltaTime;
 
-			if (scene.name == "Discrimination")
+			if (scene.name == "Punishment")
 			{
 				if (VelocityIntegral() > 10)
 				{
