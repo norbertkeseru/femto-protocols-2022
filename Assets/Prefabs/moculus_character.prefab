@@ -576,6 +576,7 @@ GameObject:
   - component: {fileID: 114721672624061074}
   - component: {fileID: 41655605}
   - component: {fileID: 41655602}
+  - component: {fileID: 5579214642700955135}
   - component: {fileID: 41655607}
   m_Layer: 8
   m_Name: moculus_character
@@ -591,7 +592,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000011749492562}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1498038, y: 1.149805, z: 1.149805}
   m_Children:
@@ -659,6 +660,55 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5579214642700955135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011749492562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983bd27860a3aab488a9f38432e83e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1000011749492562}
+  teleportDelta: 12
+  teleportTimer: 0
+  teleporting: 0
+  velocityDepend: 0
+  teleportationTarget1: {fileID: 0}
+  probability1: 0
+  teleportationTarget2: {fileID: 0}
+  probability2: 100
+  teleportationTarget3: {fileID: 0}
+  probability3: 0
+  teleportationTarget4: {fileID: 0}
+  probability4: 0
+  teleportationTarget5: {fileID: 0}
+  probability5: 0
+  teleportationTarget6: {fileID: 0}
+  probability6: 0
+  teleportationTarget7: {fileID: 0}
+  probability7: 0
+  teleportationTarget8: {fileID: 0}
+  probability8: 0
+  rng: 0
+  teleportEvent: 0
+  lickPuffer: 0
+  lickDelta: 0
+  lickLock: 0
+  lickTime: 0
+  teleportAfterLick: 6
+  moveTime: 0
+  teleportAfterNoMove: 0
+  RewardZone: {fileID: 0}
+  puffHappened: 0
+  rewardHappened: 0
+  sliding: 0
+  slideTime: 0.4
+  slidingSpeed: 0.2
+  puffer: []
 --- !u!114 &41655607
 MonoBehaviour:
   m_ObjectHideFlags: 0
