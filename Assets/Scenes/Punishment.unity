@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5609,6 +5609,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: teleporting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: teleportAfterNoMove
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: teleportationTarget1
+      value: 
+      objectReference: {fileID: 249080570}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: teleportationTarget2
+      value: 
+      objectReference: {fileID: 1479605181}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: teleportationTarget3
+      value: 
+      objectReference: {fileID: 1497915247}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
 --- !u!1 &1919137437 stripped
@@ -5616,54 +5636,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1000011749492562, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
   m_PrefabInstance: {fileID: 1919137435}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1919137438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919137437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983bd27860a3aab488a9f38432e83e21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1919137437}
-  teleportDelta: 12
-  teleportTimer: 0
-  teleporting: 0
-  velocityDepend: 1
-  teleportationTarget1: {fileID: 249080570}
-  probability1: 30
-  teleportationTarget2: {fileID: 1479605181}
-  probability2: 30
-  teleportationTarget3: {fileID: 1497915247}
-  probability3: 40
-  teleportationTarget4: {fileID: 0}
-  probability4: 0
-  teleportationTarget5: {fileID: 0}
-  probability5: 0
-  teleportationTarget6: {fileID: 0}
-  probability6: 0
-  teleportationTarget7: {fileID: 0}
-  probability7: 0
-  teleportationTarget8: {fileID: 0}
-  probability8: 0
-  rng: 0
-  teleportEvent: 0
-  lickPuffer: 0
-  lickDelta: 0
-  lickLock: 0
-  lickTime: 0
-  teleportAfterLick: 0
-  moveTime: 0
-  teleportAfterNoMove: 0
-  puffHappened: 0
-  rewardHappened: 0
-  sliding: 0
-  slideTime: 0.2
-  slidingSpeed: 0
-  puffer: []
 --- !u!1001 &1936246694
 PrefabInstance:
   m_ObjectHideFlags: 0

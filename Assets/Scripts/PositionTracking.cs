@@ -348,7 +348,7 @@ public class PositionTracking : MonoBehaviour
 
 		rng = GetRandomValue();
 
-		if (teleportTimer >= teleportDelta && lickTime >= teleportAfterLick)
+		if (teleportTimer >= teleportDelta && moveTime >= teleportAfterNoMove)
 		{
 			switch (rng)
 			{
