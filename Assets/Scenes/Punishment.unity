@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 70713864}
   - component: {fileID: 70713863}
   m_Layer: 13
-  m_Name: Control_45_end_trigger
+  m_Name: Control_135_end_trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,7 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 232311591}
   m_Layer: 13
-  m_Name: Control_135_cloud_start
+  m_Name: Control_45_cloud_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,7 +534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 249080571}
   m_Layer: 13
-  m_Name: Control_45_start
+  m_Name: Control_135_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 316887058}
   - component: {fileID: 316887057}
   m_Layer: 13
-  m_Name: Control_135_end_trigger
+  m_Name: Control_45_end_trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1494,7 +1494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 740740615}
   m_Layer: 13
-  m_Name: Control_45
+  m_Name: Control_135
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2012,7 +2012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 866024457}
   m_Layer: 13
-  m_Name: Puff_cloud_start
+  m_Name: Reward_cloud_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2046,7 +2046,7 @@ GameObject:
   - component: {fileID: 885840927}
   - component: {fileID: 885840926}
   m_Layer: 13
-  m_Name: Puff_end_trigger
+  m_Name: Reward_end_trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2157,7 +2157,7 @@ GameObject:
   - component: {fileID: 915029327}
   - component: {fileID: 915029330}
   m_Layer: 13
-  m_Name: Control_135_cloud
+  m_Name: Control_45_cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2264,7 +2264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 917973747}
   m_Layer: 13
-  m_Name: Control_45_cloud_start
+  m_Name: Control_135_cloud_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2425,9 +2425,8 @@ GameObject:
   - component: {fileID: 964720873}
   - component: {fileID: 964720872}
   - component: {fileID: 964720875}
-  - component: {fileID: 964720871}
   m_Layer: 13
-  m_Name: Control_45_zone
+  m_Name: Control_135_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2447,21 +2446,6 @@ Transform:
   m_Father: {fileID: 740740615}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &964720871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964720869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb470ae482bdd4c4eaa5a2706c7c4c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  teleportationTarget: {fileID: 0}
-  telemetry: {fileID: 0}
 --- !u!65 &964720872
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2533,18 +2517,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 964720869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8f947b4d8bdc4489abdfbacc89e037, type: 3}
+  m_Script: {fileID: 11500000, guid: cc4a9dfa75878654fbeac2a9893b89ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1919137437}
   teleportationTarget: {fileID: 0}
   telemetry: {fileID: 0}
-  licktreshold: 1
-  timer: 3
-  droptimer: 0.05
-  tapOpentime: 0.05
+  timer: 4
   timerPufftime: 4
-  licked: 0
+  velocity: 0
+  puffTime: 4
+  phasor: 0
+  phasorTimer: 0
+  phasorTime: 0
 --- !u!1001 &1049980767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2810,7 +2795,7 @@ GameObject:
   - component: {fileID: 1147287602}
   - component: {fileID: 1147287601}
   m_Layer: 13
-  m_Name: Control_135_start_collider
+  m_Name: Control_45_start_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3348,7 +3333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1284086376}
   m_Layer: 13
-  m_Name: Puff
+  m_Name: Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3388,7 +3373,7 @@ GameObject:
   - component: {fileID: 1287233634}
   - component: {fileID: 1287233637}
   m_Layer: 13
-  m_Name: Control_45_cloud
+  m_Name: Control_135_cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3802,7 +3787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1372223257}
   m_Layer: 13
-  m_Name: Control_135
+  m_Name: Control_45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3842,7 +3827,7 @@ GameObject:
   - component: {fileID: 1385965772}
   - component: {fileID: 1385965775}
   m_Layer: 13
-  m_Name: Puff_cloud
+  m_Name: Reward_cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4213,7 +4198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1479605182}
   m_Layer: 13
-  m_Name: Puff_start
+  m_Name: Reward_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4371,7 +4356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1497915248}
   m_Layer: 13
-  m_Name: Control_135_start
+  m_Name: Control_45_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4404,7 +4389,7 @@ GameObject:
   - component: {fileID: 1558153623}
   - component: {fileID: 1558153622}
   m_Layer: 13
-  m_Name: Puff_start_collider
+  m_Name: Reward_start_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4500,7 +4485,7 @@ GameObject:
   - component: {fileID: 1559537240}
   - component: {fileID: 1559537239}
   m_Layer: 13
-  m_Name: Control_135_zone
+  m_Name: Control_45_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5298,7 +5283,7 @@ GameObject:
   - component: {fileID: 1859836657}
   - component: {fileID: 1859836656}
   m_Layer: 13
-  m_Name: Puff_zone
+  m_Name: Reward_zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5327,19 +5312,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1859836654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc4a9dfa75878654fbeac2a9893b89ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c8f947b4d8bdc4489abdfbacc89e037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1919137437}
   teleportationTarget: {fileID: 0}
   telemetry: {fileID: 0}
-  timer: 4
+  licktreshold: 1
+  timer: 3
+  droptimer: 0.05
+  tapOpentime: 0.05
   timerPufftime: 4
-  velocity: 0
-  puffTime: 4
-  phasor: 0
-  phasorTimer: 0
-  phasorTime: 0
+  licked: 0
 --- !u!65 &1859836657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5610,8 +5594,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: RewardZone
+      value: 
+      objectReference: {fileID: 1859836654}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: teleporting
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: probability1
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: probability2
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: probability3
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: teleportDelta
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: teleportAfterNoMove
@@ -6172,7 +6176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8644578294113079035, guid: 69e318b7f60e0dd4c86557ebe6c5e250, type: 3}
       propertyPath: m_Name
-      value: Control_45_start_collider
+      value: Control_135_start_collider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69e318b7f60e0dd4c86557ebe6c5e250, type: 3}
