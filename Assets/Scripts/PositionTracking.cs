@@ -175,7 +175,7 @@ public class PositionTracking : MonoBehaviour
 
 	public void PuffZone()
 	{
-		TeleportToTarget();
+		//TeleportToTarget();
 		puffZone = true;
 	}
 
@@ -278,35 +278,35 @@ public class PositionTracking : MonoBehaviour
 
 
 
-	public void TeleportToDefined()
-	{
-		if (velocityDepend == true)
-		{
-			if (VelocityIntegral() < 1)
-			{
-				teleportTimer += Time.deltaTime;
-			}
-			else
-			{
-				teleportTimer = 0;
-			}
+	//public void TeleportToDefined()
+	//{
+	//	if (velocityDepend == true)
+	//	{
+	//		if (VelocityIntegral() < 1)
+	//		{
+	//			teleportTimer += Time.deltaTime;
+	//		}
+	//		else
+	//		{
+	//			teleportTimer = 0;
+	//		}
 
-		}
-		else
-		{
-			teleportTimer += Time.deltaTime;
-		}
+	//	}
+	//	else
+	//	{
+	//		teleportTimer += Time.deltaTime;
+	//	}
 
-		if (teleportTimer >= teleportDelta)
-		{
-			Player.transform.position = teleportationTarget1.transform.position;
-			teleportEvent = true;
-			sliding = true;
-			startPosition = Player.transform.position;
-			teleportTimer = 0;
-			speed = slidingSpeed;
-		}
-	}
+	//	if (teleportTimer >= teleportDelta)
+	//	{
+	//		Player.transform.position = teleportationTarget1.transform.position;
+	//		teleportEvent = true;
+	//		sliding = true;
+	//		startPosition = Player.transform.position;
+	//		teleportTimer = 0;
+	//		speed = slidingSpeed;
+	//	}
+	//}
 
 	public void TeleportToTarget()
 	{
