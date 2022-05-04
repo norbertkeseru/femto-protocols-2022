@@ -65,7 +65,7 @@ public class GramophoneDevice : MonoBehaviour {
             }
         }
 
-        return "COM9";
+        return "COM100";
     }
 
     public void inputVelocityValue (string stringVelocity)
