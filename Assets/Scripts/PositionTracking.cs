@@ -348,7 +348,7 @@ public class PositionTracking : MonoBehaviour
 
 		rng = GetRandomValue();
 
-		if (teleportTimer >= teleportDelta && lickTime >= teleportAfterLick)
+		if (teleportTimer >= teleportDelta && moveTime >= teleportAfterNoMove)
 		{
 			switch (rng)
 			{
@@ -358,7 +358,8 @@ public class PositionTracking : MonoBehaviour
 
 				case 2:
 					Player.transform.position = teleportationTarget2.transform.position;
-					break;
+                    RewardZone.GetComponent<waterRewardOblique>().RewardReset();
+                    break;
 
 				case 3:
 					Player.transform.position = teleportationTarget3.transform.position;
@@ -389,7 +390,6 @@ public class PositionTracking : MonoBehaviour
 			startPosition = Player.transform.position;
 			teleportTimer = 0;
 			speed = slidingSpeed;
-			RewardZone.GetComponent<waterRewardOblique>().RewardReset();
 		}
 
 	}
