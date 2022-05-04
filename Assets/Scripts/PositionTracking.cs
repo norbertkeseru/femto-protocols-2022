@@ -181,7 +181,6 @@ public class PositionTracking : MonoBehaviour
 
 	public void PuffHappens()
 	{
-		puffZone = true;
 		puffHappened = true;
 	}
 

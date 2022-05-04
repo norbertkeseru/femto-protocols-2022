@@ -16,6 +16,7 @@ public class puff : MonoBehaviour {
 	public float phasorTimer;
 	public float phasorTime;
     bool reduce = false;
+    bool reduce2 = false;
     bool phasorReduce = false;
     private GramophoneDevice device;
 
@@ -38,6 +39,7 @@ public class puff : MonoBehaviour {
         if (other.tag == "Player")
         {
             reduce = true;
+            reduce2 = true;
         }
     }
 
@@ -46,6 +48,7 @@ public class puff : MonoBehaviour {
         if (other.tag == "Player")
         {
             reduce = false;
+            reduce2 = false;
 			timer=timerPufftime;
 			AntiPuff();
         }
@@ -64,6 +67,10 @@ public class puff : MonoBehaviour {
 		if (reduce == true)
         {
             timer -= Time.deltaTime;
+        }
+
+        if (reduce2 == true)
+        {
             PuffZone();
         }
 

@@ -7,6 +7,7 @@ using System;
 public class HUD : MonoBehaviour
 {
     public GramophoneDevice GD;
+    public PositionTracking PT;
     public Image Puff;
     public Image Puff_icon;
     public Image Lick;
@@ -15,6 +16,7 @@ public class HUD : MonoBehaviour
     public Image Drop_icon;
     public Image Recording;
     public Image Recording_circle;
+    //public Image Debug;
     Color32 trueColor = new Color32(0, 255, 0, 100);
 
     void Start()
@@ -69,5 +71,13 @@ public class HUD : MonoBehaviour
             Recording.enabled = false;
             Recording_circle.enabled = false;
         }
+        //if (PT.puffZone == true)
+        //{
+        //    Debug.enabled = true;
+        //}
+        //else
+        //{
+        //    Debug.enabled = false;
+        //}
     }
 }
