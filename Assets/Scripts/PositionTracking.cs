@@ -69,6 +69,9 @@ public class PositionTracking : MonoBehaviour
 	private float speed; //karakter sebessege
 	[HideInInspector] public List<float> puffer = new List<float>();
 	private Scene scene;
+	bool rewardScene;
+	bool punishmentScene;
+	bool mismatchScene;
 
 	void Start()
 	{
@@ -346,8 +349,9 @@ public class PositionTracking : MonoBehaviour
         }
 
 		rng = GetRandomValue();
-
-		if (teleportTimer >= teleportDelta && moveTime >= teleportAfterNoMove)
+		if (scene.name == "Reward" && lickTime >= teleportAfterLick) rewardScene = true;
+		if (scene.name == "Punishment" && moveTime >= teleportAfterNoMove) punishmentScene = true;
+		if (teleportTimer >= teleportDelta && (rewardScene || punishmentScene))
 		{
 			switch (rng)
 			{
@@ -357,7 +361,7 @@ public class PositionTracking : MonoBehaviour
 
 				case 2:
 					Player.transform.position = teleportationTarget2.transform.position;
-                    RewardZone.GetComponent<waterRewardOblique>().RewardReset();
+					if (scene.name == "Punishment") RewardZone.GetComponent<waterRewardOblique>().RewardReset();
                     break;
 
 				case 3:

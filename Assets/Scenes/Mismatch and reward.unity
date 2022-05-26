@@ -248,6 +248,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: teleportAfterNoMove
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
 --- !u!1 &140706459 stripped
@@ -1585,6 +1589,8 @@ MonoBehaviour:
   eventTime: 1
   rewardTime: 3
   dropTimer: 0.05
+  endTrial: 10
+  trialNumber: 3
 --- !u!1001 &1078028844
 PrefabInstance:
   m_ObjectHideFlags: 0
