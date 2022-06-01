@@ -56,7 +56,7 @@ public class mismatch : MonoBehaviour
 		{
 			MismatchZone();
 
-			if (Player.GetComponent<PositionTracking>().VelocityIntegral() > 5)
+			if (Player.GetComponent<PositionTracking>().VelocityIntegral() > 2)
             {
 				movingTime += Time.deltaTime;
             }
