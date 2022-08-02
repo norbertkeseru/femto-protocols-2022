@@ -20,17 +20,19 @@ public class mismatch : MonoBehaviour
 	[SerializeField] public float rewardTime;
 	[SerializeField] public float dropTimer;
 	[SerializeField] public float endTrial;
-	[SerializeField] public int trialNumber;
-	private bool eventCounter;
+    [SerializeField] public int trialNumber;
+    private bool eventCounter;
 
 	void Start()
 	{
-		device = GramophoneDevice.Instance();
+        PlayerPrefs.DeleteAll();
+        //device = GramophoneDevice.Instance();
 		eventCounter = false;
 		mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);
 		if (!PlayerPrefs.HasKey("trialNumber"))
         {
-			PlayerPrefs.SetInt("trialNumber", 0);
+            Debug.Log("The key " + "trialNumber" + " does not exist");
+            PlayerPrefs.SetInt("trialNumber", 0);
 		}
 	}
 
@@ -107,6 +109,7 @@ public class mismatch : MonoBehaviour
 			Application.Quit();
 			PlayerPrefs.DeleteAll();
 		}
-		SceneManager.LoadScene("Mismatch and reward");
+        device.ClosePort();
+        SceneManager.LoadScene("Mismatch and reward");
 	}
 }
