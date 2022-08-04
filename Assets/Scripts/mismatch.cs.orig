@@ -20,11 +20,18 @@ public class mismatch : MonoBehaviour
 	[SerializeField] public float rewardTime;
 	[SerializeField] public float dropTimer;
 	[SerializeField] public float endTrial;
-
+    [SerializeField] public int trialNumber;
+    private bool eventCounter;
 
 	void Start()
 	{
-        PlayerPrefs.DeleteAll();		eventCounter = false;
+<<<<<<< HEAD
+        device = GramophoneDevice.Instance();
+=======
+        PlayerPrefs.DeleteAll();
+        //device = GramophoneDevice.Instance();
+>>>>>>> 4abd46d5609d3d8533191fb68440c616b4d285ca
+		eventCounter = false;
 		mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);
 		if (!PlayerPrefs.HasKey("trialNumber"))
         {
@@ -103,7 +110,8 @@ public class mismatch : MonoBehaviour
 		IncreaseTrialNumber();
 		if (PlayerPrefs.GetInt("trialNumber") == trialNumber)
         {
-
+            PlayerPrefs.DeleteAll();
+            Application.Quit();
 		}
         device.ClosePort();
         SceneManager.LoadScene("Mismatch and reward");
