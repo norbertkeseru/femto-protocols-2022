@@ -25,7 +25,7 @@ public class mismatch : MonoBehaviour
 
 	void Start()
 	{
-		device = GramophoneDevice.Instance();
+        device = GramophoneDevice.Instance();
 		eventCounter = false;
 		mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);
 		if (!PlayerPrefs.HasKey("trialNumber"))
@@ -104,8 +104,8 @@ public class mismatch : MonoBehaviour
 		IncreaseTrialNumber();
 		if (PlayerPrefs.GetInt("trialNumber") == trialNumber)
         {
-			Application.Quit();
-			PlayerPrefs.DeleteAll();
+            PlayerPrefs.DeleteAll();
+            Application.Quit();
 		}
 		SceneManager.LoadScene("Mismatch and reward");
 	}
