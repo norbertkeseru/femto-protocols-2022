@@ -11,7 +11,7 @@ public class MiceMovement : MonoBehaviour {
 
 	void Start ()
 	{
-		device = GramophoneDevice.Instance();
+        device = GramophoneDevice.Instance();
         m_Rigidbody = GetComponent<Rigidbody>();
 	}
 

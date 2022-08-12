@@ -197,14 +197,14 @@ public class GramophoneDevice : MonoBehaviour {
         instance = this;
     }
 
-    void Start ()
+    void Start()
     {
-            Port = AutodetectArduinoPort();
-            velocity = 0;
-            stream = new SerialPort(Port, 115200);
-            stream.Open();
-            velocityInput.onEndEdit.AddListener(inputVelocityValue);
-            Reverse();
+        Port = AutodetectArduinoPort();
+        velocity = 0;
+        stream = new SerialPort(Port, 115200);
+        stream.Open();
+        velocityInput.onEndEdit.AddListener(inputVelocityValue);
+        Reverse();
 	}
 
 	void Update ()

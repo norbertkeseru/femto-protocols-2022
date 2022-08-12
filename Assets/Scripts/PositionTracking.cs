@@ -75,19 +75,19 @@ public class PositionTracking : MonoBehaviour
 
 	void Start()
 	{
-		rng = UnityEngine.Random.Range(1, 9);
-		speed = slidingSpeed;
-		slideTimer = 0;
-		device = GramophoneDevice.Instance();
-		//if (velocityDepend == true)
-		//{
-			puffer.Add(device.GetVelocity());
-		//}
-		string clean = Regex.Replace(localDate + ";", @"[. :;]", "");
-		writer = new StreamWriter(clean + "training" + ".csv", append: false);
-		writer.WriteLine("time;position;velocity;aversive;left;right;black;cloud;mismatch;teleport;port_A;port_B;port_C;Trigger;Input2;lickLock;Lick;lickDelta;Systime;");
-		probability8 = 100 - (probability1 + probability2 + probability3 + probability4 + probability5 + probability6 + probability7);
-		scene = SceneManager.GetActiveScene();
+        rng = UnityEngine.Random.Range(1, 9);
+        speed = slidingSpeed;
+        slideTimer = 0;
+        device = GramophoneDevice.Instance();
+        //if (velocityDepend == true)
+        //{
+        puffer.Add(device.GetVelocity());
+        //}
+        string clean = Regex.Replace(localDate + ";", @"[. :;]", "");
+        writer = new StreamWriter(clean + "training" + ".csv", append: false);
+        writer.WriteLine("time;position;velocity;aversive;left;right;black;cloud;mismatch;teleport;port_A;port_B;port_C;Trigger;Input2;lickLock;Lick;lickDelta;Systime;");
+        probability8 = 100 - (probability1 + probability2 + probability3 + probability4 + probability5 + probability6 + probability7);
+        scene = SceneManager.GetActiveScene();
 	}
 
 	void LateUpdate()
@@ -110,7 +110,11 @@ public class PositionTracking : MonoBehaviour
 		}
 
 		if (Input.GetKey("escape"))
-			PlayerPrefs.DeleteAll();		}
+        {
+            PlayerPrefs.DeleteAll();
+            Application.Quit();
+            device.ClosePort();
+        }
 
 		WritePositionToCSV(Player);
 	}

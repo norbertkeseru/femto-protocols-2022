@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1640,6 +1640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 140706459}
   teleportationTarget: {fileID: 0}
+  device: {fileID: 1687528005}
   telemetry: {fileID: 0}
   mismatchAfterMin: 3
   mismatchAfterMax: 5
@@ -1648,7 +1649,8 @@ MonoBehaviour:
   rewardTime: 3
   dropTimer: 0.02
   endTrial: 10
-  trialNumber: 100
+  trialNumber: 3
+  sceneLoaded: 0
 --- !u!1001 &1078028844
 PrefabInstance:
   m_ObjectHideFlags: 0

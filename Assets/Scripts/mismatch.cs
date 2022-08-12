@@ -9,7 +9,7 @@ public class mismatch : MonoBehaviour
 
 	public GameObject Player;
 	public GameObject teleportationTarget;
-	private GramophoneDevice device;
+	[SerializeField]private GramophoneDevice device;
 	public Text telemetry;
 	bool reduce = false;
 	[SerializeField] private float mismatchAfterMin;
@@ -20,17 +20,19 @@ public class mismatch : MonoBehaviour
 	[SerializeField] public float rewardTime;
 	[SerializeField] public float dropTimer;
 	[SerializeField] public float endTrial;
+    //[SerializeField] public int trialNumber;
+    private bool eventCounter;
+    public bool sceneLoaded;
 
-
-	void Start()
+    void Start()
 	{
-        PlayerPrefs.DeleteAll();		eventCounter = false;
+        sceneLoaded = false;
+        eventCounter = false;
 		mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);
-		if (!PlayerPrefs.HasKey("trialNumber"))
-        {
-            Debug.Log("The key " + "trialNumber" + " does not exist");
-            PlayerPrefs.SetInt("trialNumber", 0);
-		}
+		//if (!PlayerPrefs.HasKey("trialNumber"))
+        //{
+        //  PlayerPrefs.SetInt("trialNumber", 0);
+		//}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -85,10 +87,10 @@ public class mismatch : MonoBehaviour
     {
 		StartCoroutine(MismatchEvent());
 	}
-	public void IncreaseTrialNumber()
-    {
-		PlayerPrefs.SetInt("trialNumber", PlayerPrefs.GetInt("trialNumber") + 1);
-    }
+	//public void IncreaseTrialNumber()
+    //{
+	//	PlayerPrefs.SetInt("trialNumber", PlayerPrefs.GetInt("trialNumber") + 1);
+    //}
 	IEnumerator MismatchEvent()
     {
 		Player.GetComponent<MiceMovement>().Stop();
@@ -100,12 +102,14 @@ public class mismatch : MonoBehaviour
 		yield return new WaitForSecondsRealtime(dropTimer);
 		device.CloseB();
 		yield return new WaitForSecondsRealtime(endTrial);
-		IncreaseTrialNumber();
-		if (PlayerPrefs.GetInt("trialNumber") == trialNumber)
-        {
-
-		}
-        device.ClosePort();
+        //IncreaseTrialNumber();
+        //if (PlayerPrefs.GetInt("trialNumber") == trialNumber)
+        //      {
+        //          Application.Quit();
+        //          PlayerPrefs.DeleteAll();
+        //      }
+        Application.Quit();
         SceneManager.LoadScene("Mismatch and reward");
-	}
+        sceneLoaded = true;
+    }
 }
