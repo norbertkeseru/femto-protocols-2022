@@ -25,7 +25,6 @@ public class mismatch : MonoBehaviour
 
 	void Start()
 	{
-        PlayerPrefs.DeleteAll();
         //device = GramophoneDevice.Instance();
 		eventCounter = false;
 		mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);

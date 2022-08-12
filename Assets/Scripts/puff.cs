@@ -22,9 +22,9 @@ public class puff : MonoBehaviour {
 
     void Start()
     {
-		phasor=1;
-		phasorTimer=0.4f;
-		phasorTime=0.4f;
+        phasor = 1;
+        phasorTimer = 4;
+        phasorTime = 4f;
         device = GramophoneDevice.Instance();
     }
 		
@@ -55,12 +55,35 @@ public class puff : MonoBehaviour {
     }
 
     void Update()
-    {
-		phasorTimer -= Time.deltaTime;
+    { 
+            phasorTimer -= Time.deltaTime;
 
-	    if (phasorTimer <= 0)
+        if (phasorTimer <= 0)
         {
-		    phasor=-phasor;
+
+//Eszter tól
+            if ((Player.GetComponent<PositionTracking>().VelocityIntegral() < 1) ) // & (Player.GetComponent<PositionTracking> ().VelocityIntegral() > 0.5) 
+            {
+                phasorTimer = 1f;
+                phasorTime = 1f;
+                phasorTimer -= Time.deltaTime;
+            }
+            else if (((Player.GetComponent<PositionTracking>().VelocityIntegral() > 1) ) & (Player.GetComponent<PositionTracking>().VelocityIntegral() < 2))
+            {
+                phasorTimer = 0.4f;
+                phasorTime = 0.4f;
+                phasorTimer -= Time.deltaTime;
+            }
+            else if (((Player.GetComponent<PositionTracking>().VelocityIntegral() > 2) ) & (Player.GetComponent<PositionTracking>().VelocityIntegral() <=3))
+            {
+                phasorTimer = 0.2f;
+                phasorTime = 0.2f;
+                phasorTimer -= Time.deltaTime;
+            }
+//Eszter ig
+
+
+            phasor = -phasor;
 		    phasorTimer=phasorTime;
 		}
 
@@ -73,13 +96,15 @@ public class puff : MonoBehaviour {
         {
             PuffZone();
         }
-
+        
         if ((timer <= 0))
-        {
-           	if ((Player.GetComponent<PositionTracking> ().VelocityIntegral() < 1) & phasor==1)
+        {   //ha 1 akkor épp, hogy csak mozog
+         	if ((Player.GetComponent<PositionTracking> ().VelocityIntegral() <=3) & phasor==1)/*||(((Player.GetComponent<PositionTracking>().VelocityIntegral() > 1) & phasor == 1)
+                & (Player.GetComponent<PositionTracking>().VelocityIntegral() < 2)) ||  (((Player.GetComponent<PositionTracking>().VelocityIntegral() > 2) & phasor == 1) &
+                (Player.GetComponent<PositionTracking>().VelocityIntegral() < 3)))*/
             {
-				Puff ();
-			}
+                Puff ();
+            }
             else
             {
 				AntiPuff ();
@@ -92,7 +117,7 @@ public class puff : MonoBehaviour {
 
     void Puff()
     {
-        reduce = false;
+        reduce = false;// false volt
         
         /* you can do some control here
 
