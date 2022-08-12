@@ -32,8 +32,6 @@ public class mismatch : MonoBehaviour
 		//if (!PlayerPrefs.HasKey("trialNumber"))
         //{
         //  PlayerPrefs.SetInt("trialNumber", 0);
-		//}
-	}
 
 	void OnTriggerEnter(Collider other)
 	{
