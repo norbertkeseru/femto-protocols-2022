@@ -20,18 +20,24 @@ public class mismatch : MonoBehaviour
 	[SerializeField] public float rewardTime;
 	[SerializeField] public float dropTimer;
 	[SerializeField] public float endTrial;
-	bool eventCounter;
+    [SerializeField] public int trialNumber;
+    private bool eventCounter;
 
 	void Start()
 	{
+<<<<<<< HEAD
+        device = GramophoneDevice.Instance();
+=======
         PlayerPrefs.DeleteAll();
+        //device = GramophoneDevice.Instance();
+>>>>>>> 4abd46d5609d3d8533191fb68440c616b4d285ca
 		eventCounter = false;
 		mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);
-		//if (!PlayerPrefs.HasKey("trialNumber"))
-  //      {
-  //          Debug.Log("The key " + "trialNumber" + " does not exist");
-  //          PlayerPrefs.SetInt("trialNumber", 0);
-		//}
+		if (!PlayerPrefs.HasKey("trialNumber"))
+        {
+            Debug.Log("The key " + "trialNumber" + " does not exist");
+            PlayerPrefs.SetInt("trialNumber", 0);
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -86,10 +92,10 @@ public class mismatch : MonoBehaviour
     {
 		StartCoroutine(MismatchEvent());
 	}
-	//public void IncreaseTrialNumber()
- //   {
-	//	PlayerPrefs.SetInt("trialNumber", PlayerPrefs.GetInt("trialNumber") + 1);
- //   }
+	public void IncreaseTrialNumber()
+    {
+		PlayerPrefs.SetInt("trialNumber", PlayerPrefs.GetInt("trialNumber") + 1);
+    }
 	IEnumerator MismatchEvent()
     {
 		Player.GetComponent<MiceMovement>().Stop();
@@ -101,11 +107,12 @@ public class mismatch : MonoBehaviour
 		yield return new WaitForSecondsRealtime(dropTimer);
 		device.CloseB();
 		yield return new WaitForSecondsRealtime(endTrial);
-		//IncreaseTrialNumber();
-		//if (PlayerPrefs.GetInt("trialNumber") == trialNumber)
-  //      {
-
-		//}
+		IncreaseTrialNumber();
+		if (PlayerPrefs.GetInt("trialNumber") == trialNumber)
+        {
+            PlayerPrefs.DeleteAll();
+            Application.Quit();
+		}
         device.ClosePort();
         SceneManager.LoadScene("Mismatch and reward");
 	}

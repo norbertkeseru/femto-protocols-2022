@@ -110,7 +110,17 @@ public class PositionTracking : MonoBehaviour
 		}
 
 		if (Input.GetKey("escape"))
-			PlayerPrefs.DeleteAll();		}
+<<<<<<< HEAD
+        {
+            device.ClosePort();
+            Application.Quit();
+=======
+		{
+            PlayerPrefs.DeleteAll();
+            Application.Quit();
+            device.ClosePort();
+>>>>>>> 4abd46d5609d3d8533191fb68440c616b4d285ca
+		}
 
 		WritePositionToCSV(Player);
 	}
