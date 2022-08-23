@@ -1332,6 +1332,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69e318b7f60e0dd4c86557ebe6c5e250, type: 3}
+--- !u!1 &895530611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8644578294113079035, guid: 69e318b7f60e0dd4c86557ebe6c5e250, type: 3}
+  m_PrefabInstance: {fileID: 895530610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &999473016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1640,17 +1645,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 140706459}
   teleportationTarget: {fileID: 0}
+  startLocation: {fileID: 895530611}
   device: {fileID: 1687528005}
   telemetry: {fileID: 0}
   mismatchAfterMin: 3
   mismatchAfterMax: 5
   mismatchAfterMoving: 0
+  movingTime: 0
   eventTime: 1
   rewardTime: 3
   dropTimer: 0.02
   endTrial: 10
-  trialNumber: 3
-  sceneLoaded: 0
+  trialSum: 20
 --- !u!1001 &1078028844
 PrefabInstance:
   m_ObjectHideFlags: 0

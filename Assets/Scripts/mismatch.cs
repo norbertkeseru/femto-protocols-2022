@@ -9,29 +9,32 @@ public class mismatch : MonoBehaviour
 
 	public GameObject Player;
 	public GameObject teleportationTarget;
-	[SerializeField]private GramophoneDevice device;
+    public GameObject startLocation;
+    [SerializeField]private GramophoneDevice device;
 	public Text telemetry;
 	bool reduce = false;
 	[SerializeField] private float mismatchAfterMin;
 	[SerializeField] private float mismatchAfterMax;
 	[SerializeField] private float mismatchAfterMoving;
-	private float movingTime;
+    [SerializeField] private float movingTime;
 	[SerializeField] public float eventTime;
 	[SerializeField] public float rewardTime;
 	[SerializeField] public float dropTimer;
 	[SerializeField] public float endTrial;
-    //[SerializeField] public int trialNumber;
+    [SerializeField] public int trialSum;
+    private int trialNum;
     private bool eventCounter;
-    public bool sceneLoaded;
+    private Coroutine coroutine;
 
     void Start()
-	{
-        sceneLoaded = false;
+    {
         eventCounter = false;
-		mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);
-		//if (!PlayerPrefs.HasKey("trialNumber"))
+        mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);
+        //if (!PlayerPrefs.HasKey("trialNumber"))
         //{
         //  PlayerPrefs.SetInt("trialNumber", 0);
+        trialNum = 0;
+    }
 
 	void OnTriggerEnter(Collider other)
 	{
@@ -51,11 +54,11 @@ public class mismatch : MonoBehaviour
 
 	void Update()
 	{
-		if (reduce == true)
+        if (reduce == true)
 		{
 			MismatchZone();
 
-			if (Player.GetComponent<PositionTracking>().VelocityIntegral() > 2)
+			if (Player.GetComponent<PositionTracking>().VelocityIntegral() > 3)
             {
 				movingTime += Time.deltaTime;
             }
@@ -73,6 +76,8 @@ public class mismatch : MonoBehaviour
         else
         {
 			eventCounter = false;
+            movingTime = 0;
+            StopCoroutine(coroutine);
         }
 	}
 
@@ -82,32 +87,34 @@ public class mismatch : MonoBehaviour
 	}
 
 	public void Mismatch()
+
     {
-		StartCoroutine(MismatchEvent());
+		coroutine = StartCoroutine(MismatchEvent());
 	}
-	//public void IncreaseTrialNumber()
+    //public void IncreaseTrialNumber()
     //{
-	//	PlayerPrefs.SetInt("trialNumber", PlayerPrefs.GetInt("trialNumber") + 1);
+    //	PlayerPrefs.SetInt("trialNumber", PlayerPrefs.GetInt("trialNumber") + 1);
     //}
-	IEnumerator MismatchEvent()
+    IEnumerator MismatchEvent()
     {
-		Player.GetComponent<MiceMovement>().Stop();
-		yield return new WaitForSecondsRealtime(eventTime);
-		Player.GetComponent<MiceMovement>().Restart();
-		yield return new WaitForSecondsRealtime(rewardTime);
+        trialNum++;
+        Player.GetComponent<MiceMovement>().Stop();
+        yield return new WaitForSecondsRealtime(eventTime);
+        Player.GetComponent<MiceMovement>().Restart();
+        yield return new WaitForSecondsRealtime(rewardTime);
         device.OpenB();
-		Player.GetComponent<PositionTracking>().RewardHappens();
-		yield return new WaitForSecondsRealtime(dropTimer);
-		device.CloseB();
-		yield return new WaitForSecondsRealtime(endTrial);
+        Player.GetComponent<PositionTracking>().RewardHappens();
+        yield return new WaitForSecondsRealtime(dropTimer);
+        device.CloseB();
+        yield return new WaitForSecondsRealtime(endTrial);
+        Player.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, startLocation.transform.position.z + 6.5f);
+        mismatchAfterMoving = Random.Range(mismatchAfterMin, mismatchAfterMax);
         //IncreaseTrialNumber();
-        //if (PlayerPrefs.GetInt("trialNumber") == trialNumber)
-        //      {
-        //          Application.Quit();
-        //          PlayerPrefs.DeleteAll();
-        //      }
-        Application.Quit();
-        SceneManager.LoadScene("Mismatch and reward");
-        sceneLoaded = true;
+        if (trialNum == trialSum)
+        {
+            Application.Quit();
+            PlayerPrefs.DeleteAll();
+        }
+        //SceneManager.LoadScene("Mismatch and reward");
     }
 }

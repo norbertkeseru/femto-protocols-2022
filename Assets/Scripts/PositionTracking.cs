@@ -439,8 +439,8 @@ public class PositionTracking : MonoBehaviour
 
 		lickLock = device.GetInputVal2();
 		teleportEvent = false;
-		Debug.Log(log);
-		writer.WriteLine(log);
+        Debug.Log(log);
+        writer.WriteLine(log);
 		puffHappened = false;
 		puffZone = false;
 		leftZone = false;
