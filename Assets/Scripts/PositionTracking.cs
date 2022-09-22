@@ -22,60 +22,60 @@ public class PositionTracking : MonoBehaviour
 	private GramophoneDevice device;
 
 	//teleport stuff
-	public float teleportDelta; //ennyi idot var ha all az eger, mielott teleportal
-	public float teleportTimer = 0; //szamol teleportDelta-ig, majd teleport tortenik
-	public bool teleporting; //checkbox, ha pipa, akkor van teleport
-	public bool velocityDepend; //sebessegfuggo teleport
-	public GameObject teleportationTarget1; //1. teleporthely
+	public float teleportDelta; //time before teleport, for stationary mouse
+	public float teleportTimer = 0; //counts up to teleportDelta, then teleport event occurs
+	public bool teleporting; //checkbox, if true, then teleport is enabled
+	public bool velocityDepend; //velocity dependent teleport
+	public GameObject teleportationTarget1; //1. teleportation target
 	public float probability1;
-	public GameObject teleportationTarget2; //2. teleporthely
+	public GameObject teleportationTarget2; //2. teleportation target
 	public float probability2;
-	public GameObject teleportationTarget3; //3. teleporthely
+	public GameObject teleportationTarget3; //3. teleportation target
 	public float probability3;
-	public GameObject teleportationTarget4; //4. teleporthely
+	public GameObject teleportationTarget4; //4. teleportation target
 	public float probability4;
-	public GameObject teleportationTarget5; //5. teleporthely
+	public GameObject teleportationTarget5; //5. teleportation target
 	public float probability5;
-	public GameObject teleportationTarget6; //6. teleporthely
+	public GameObject teleportationTarget6; //6. teleportation target
 	public float probability6;
-	public GameObject teleportationTarget7; //7. teleporthely
+	public GameObject teleportationTarget7; //7. teleportation target
 	public float probability7;
-	public GameObject teleportationTarget8; //8. teleporthely
+	public GameObject teleportationTarget8; //8. teleportation target
 	public float probability8;
-	public int rng = 0; //1-9 kozott vesz fel random integert
-	[HideInInspector] public bool teleportEvent = false; //logolasnal 1-ha teleport van eppen es 0 egyebkent
-	public float lickPuffer = 0; // a zonaban hanyszor nyalogatott, amig bent volt
-	public float lickDelta = 0; //osszesen hanyszor nyalogatott
-	public float lickLock = 0; //0, ha nincs nem nyalogat, 1 ha igen
-	public float lickTime = 0; //nyalogatás óta eltelt idõ
-	public float teleportAfterLick = 0; //ennyi idõ után teleportál nyalogatás után
-	public float moveTime = 0; //futás óta eltelt idõ
-	public float teleportAfterNoMove = 0; //ennyi idõ után teleportál futás után
-	private bool puffZone = false; //0, ha nincs puff zonaban, 1 ha igen
-	private bool leftZone = false; //0, ha nincs bal zonaban, 1 ha igen
+	public int rng = 0; //random integer between 1-9
+	[HideInInspector] public bool teleportEvent = false; //logs 1 if teleporting occurs, else 0
+	public float lickPuffer = 0; // how many licks, while in the zone
+	public float lickDelta = 0; //all licks
+	public float lickLock = 0; //0, if no lick, 1 if lick occurs
+	public float lickTime = 0; //time elapsed since last lick
+	public float teleportAfterLick = 0; //teleport x seconds after last lick 
+	public float moveTime = 0; //time elapsed since last movement
+	public float teleportAfterNoMove = 0; //teleport x seconds after last movement
+	private bool puffZone = false; //0, if not in puff zone, else 1
+	private bool leftZone = false; //0, if not in left zone, else 1
+	private bool rightZone = false; //0, if not in right zone, else 1
+	private bool blackZone = false; //0, if not in black zone, else 1
+	private bool cloudZone = false; //0, if not in cloud zone, else 1
+	private bool mismatchZone = false; //0, if not in mismatch zone, else 1
 	public GameObject RewardZone;
-	private bool rightZone = false; //0, ha nincs jobb zonaban, 1 ha igen
-	private bool blackZone = false; //0, ha nincs fekete zonaban, 1 ha igen
-	private bool cloudZone = false; //0, ha nincs felho zonaban, 1 ha igen
-	private bool mismatchZone = false; //0, ha nincs mismatch zonaban, 1 ha igen
-	[HideInInspector] public bool puffHappened = false;  //0, ha nem kap puffot, 1 ha igen
-	[HideInInspector] public bool rewardHappened = false;  //0, ha nem kap jutalmat, 1 ha igen
+	[HideInInspector] public bool puffHappened = false; //logs 1 if puff occurs, else 0
+	[HideInInspector] public bool rewardHappened = false; //logs 1 if reward occurs, else 0
 	public DateTime localDate = DateTime.Now;
 	private Vector3 startPosition;
-	public bool sliding = false; //0, ha eppen nem csuszik, 1, ha igen
-	[SerializeField] private float slideTime; //csuszasi tavolsag
+	public bool sliding = false; //logs 1 if sliding occurs, else 0
+	[SerializeField] private float slideTime; //sliding time
 	private float slideTimer;
-	[SerializeField] private float slidingSpeed; //csuszasi sebesseg
-	private float speed; //karakter sebessege
-	[HideInInspector] public List<float> puffer = new List<float>();
-	private Scene scene;
-	bool rewardScene;
-	bool punishmentScene;
+	[SerializeField] private float slidingSpeed; //sliding speed
+	private float speed; //character speed
+	[HideInInspector] public List<float> puffer = new List<float>();  //a list containing all the velocity values
+	private Scene scene; //name of the current scene
+	bool rewardScene; //1 if scene == "Reward", else 0
+	bool punishmentScene; //1 if scene == "Punishment", else 0
 	bool mismatchScene;
 
 	void Start()
 	{
-        rng = UnityEngine.Random.Range(1, 9);
+        rng = UnityEngine.Random.Range(1, 9); //generates random integer between 1-9
         speed = slidingSpeed;
         slideTimer = 0;
         device = GramophoneDevice.Instance();
@@ -362,7 +362,7 @@ public class PositionTracking : MonoBehaviour
 
 				case 2:
 					Player.transform.position = teleportationTarget2.transform.position;
-					if (scene.name == "Punishment") RewardZone.GetComponent<waterRewardOblique>().RewardReset();
+					if (scene.name == "Punishment" || scene.name =="Reward") RewardZone.GetComponent<waterRewardOblique>().RewardReset();
                     break;
 
 				case 3:
