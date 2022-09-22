@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MiceMovement : MonoBehaviour {
 
-	private GameObject PositionTracking;
-	public bool moving;
+	public bool moving; //bool, if true, then the character can be moved by Gramophone
     private GramophoneDevice device;
 	Rigidbody m_Rigidbody;
 
