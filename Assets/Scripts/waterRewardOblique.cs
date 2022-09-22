@@ -79,7 +79,7 @@ public class waterRewardOblique : MonoBehaviour {
         device.OpenB();
         Player.GetComponent<PositionTracking>().RewardHappens();
 		droptimer -= 1 * Time.deltaTime;
-		if (droptimer <= 0) {
+        if (droptimer <= 0) {
 			device.CloseB ();
             dropped=true;
 		}
