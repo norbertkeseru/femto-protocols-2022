@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class teleport : MonoBehaviour
 {
@@ -33,7 +34,10 @@ public class teleport : MonoBehaviour
 		if (other.tag == "Player")
 		{
 			reduce = false;
-			Player.GetComponent<PositionTracking>().sliding = true;
+			if(SceneManager.GetActiveScene().name != "Mismatch and reward")
+            {
+				Player.GetComponent<PositionTracking>().sliding = true;
+			}
 		}
 	}
 }
