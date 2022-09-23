@@ -362,11 +362,7 @@ public class PositionTracking : MonoBehaviour
 
 				case 2:
 					Player.transform.position = teleportationTarget2.transform.position;
-<<<<<<< HEAD
 					if (scene.name == "Punishment" || scene.name == "Reward") RewardZone.GetComponent<waterRewardOblique>().RewardReset();
-=======
-					if (scene.name == "Punishment" || scene.name =="Reward") RewardZone.GetComponent<waterRewardOblique>().RewardReset();
->>>>>>> 27d8810ec6bbf6079405a3a92aac6daacfea8bf4
                     break;
 
 				case 3:
