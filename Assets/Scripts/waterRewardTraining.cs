@@ -9,6 +9,7 @@ public class waterRewardTraining : MonoBehaviour
     public float droptimer;
     public float tapOpentime;
     bool reduce = false;
+    bool dropped = false;
 
     void Start()
     {
@@ -23,26 +24,33 @@ public class waterRewardTraining : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
             reduce = false;
+            dropped = false;
             droptimer = tapOpentime;
         }
     }
 
     void Update()
     {
-        if (reduce == true)
+        if (reduce == true && dropped == false)
         {
-            device.OpenB();
-            droptimer -= Time.deltaTime;
-            if(droptimer <= 0)
-            {
-                device.CloseB();
-            }
+            Reward();
+        }
+        
+    }
 
+    void Reward()
+    {
+        device.OpenB();
+        droptimer -= Time.deltaTime;
+        if (droptimer <= 0)
+        {
+            device.CloseB();
+            dropped = true;
         }
     }
 }
