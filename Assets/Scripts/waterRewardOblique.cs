@@ -49,6 +49,13 @@ public class waterRewardOblique : MonoBehaviour {
 			device.CloseB();
         }
     }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            reduce = true;
+        }
+    }
 
     void Update()
     {
@@ -99,6 +106,5 @@ public class waterRewardOblique : MonoBehaviour {
         droptimer = tapOpentime;
         Player.GetComponent<PositionTracking>().ResetLick();
         device.CloseB();
-        reduce = true;
     }
 }

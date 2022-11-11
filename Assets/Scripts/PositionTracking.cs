@@ -72,6 +72,7 @@ public class PositionTracking : MonoBehaviour
 	bool rewardScene; //1 if scene == "Reward", else 0
 	bool punishmentScene; //1 if scene == "Punishment", else 0
 	bool mismatchScene;
+    bool reversePunishmentScene;
 
 	void Start()
 	{
@@ -330,7 +331,7 @@ public class PositionTracking : MonoBehaviour
 		{
 			teleportTimer += Time.deltaTime;
 
-			if (scene.name == "Punishment")
+			if (scene.name == "Punishment" || scene.name == "Reverse Punishment")
 			{
 				if (VelocityIntegral() > 10)
 				{
@@ -352,9 +353,10 @@ public class PositionTracking : MonoBehaviour
 		rng = GetRandomValue();
 		if (scene.name == "Reward" && lickTime >= teleportAfterLick) rewardScene = true;
 		if (scene.name == "Punishment" && moveTime >= teleportAfterNoMove) punishmentScene = true;
-		if (teleportTimer >= teleportDelta && (rewardScene || punishmentScene))
+        if (scene.name == "Reverse Punishment" && moveTime >= teleportAfterNoMove) reversePunishmentScene = true;
+        if (teleportTimer >= teleportDelta && (rewardScene || punishmentScene || reversePunishmentScene))
 		{
-			switch (rng)
+            switch (rng)
 			{
 				case 1:
 					Player.transform.position = teleportationTarget1.transform.position;
@@ -362,7 +364,6 @@ public class PositionTracking : MonoBehaviour
 
 				case 2:
 					Player.transform.position = teleportationTarget2.transform.position;
-					if (scene.name == "Punishment" || scene.name == "Reward") RewardZone.GetComponent<waterRewardOblique>().RewardReset();
                     break;
 
 				case 3:
@@ -389,7 +390,9 @@ public class PositionTracking : MonoBehaviour
 					Player.transform.position = teleportationTarget8.transform.position;
 					break;
 			}
-			teleportEvent = true;
+            if (rewardScene || punishmentScene || reversePunishmentScene) RewardZone.GetComponent<waterRewardOblique>().RewardReset();
+
+            teleportEvent = true;
 			sliding = true;
 			startPosition = Player.transform.position;
 			teleportTimer = 0;
