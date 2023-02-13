@@ -12,21 +12,35 @@ public class GramophoneDevice : MonoBehaviour {
     public InputField velocityInput;
     public float VelocityScale = 1.0f;
     private static GramophoneDevice instance;
+    //gramophoneStart
     float velocity;
 	float inputVal;
 	float systemTime;
 	float inputVal2;
+    //gramophoneEnd
+    //treadmillStart
+    float treadmillSystemTime;
+    float treadmillVelocity;
+    float treadmillRecording;
+    float treadmillLick;
+    float treadmillPortA;
+    float treadmillPortB;
+    float treadmillPortC;
+    float treadmillPorts;
+    //treadmillEnd
     static string[] stringSeparators = new string[] { "\r\n" };
     public bool reverseDirection;
     [HideInInspector] public bool OpenedA;
     [HideInInspector] public bool OpenedB;
+    bool isGramophone;
+    bool isTreadmill;
 
     public static GramophoneDevice Instance()
     {
         return instance;
     }
 
-    public static string AutodetectArduinoPort()
+    public string AutodetectArduinoPort()
     {
         List<string> comports = new List<string>();
         string temp;
@@ -39,6 +53,25 @@ public class GramophoneDevice : MonoBehaviour {
             {
                 if (s1.Contains("VID_2341") && s1.Contains("PID_804"))
                 {
+                    Gramophone();
+                    RegistryKey rk4 = rk3.OpenSubKey(s1);
+                    foreach (string s2 in rk4.GetSubKeyNames())
+                    {
+                        RegistryKey rk5 = rk4.OpenSubKey(s2);
+                        if ((temp = (string)rk5.GetValue("FriendlyName")) != null)
+                        {
+                            RegistryKey rk6 = rk5.OpenSubKey("Device Parameters");
+                            if (rk6 != null && (temp = (string)rk6.GetValue("PortName")) != null)
+                            {
+                                comports.Add(temp);
+                            }
+                        }
+                    }
+                }
+                if (s1.Contains("VID_2341") && s1.Contains("PID_0058"))
+                {
+
+                    Treadmill();
                     RegistryKey rk4 = rk3.OpenSubKey(s1);
                     foreach (string s2 in rk4.GetSubKeyNames())
                     {
@@ -66,6 +99,17 @@ public class GramophoneDevice : MonoBehaviour {
         }
 
         return "COM100";
+    }
+
+    void Gramophone()
+    {
+        isGramophone = true;
+        isTreadmill = false;
+    }
+    void Treadmill()
+    {
+        isGramophone = false;
+        isTreadmill = true;
     }
 
     public void inputVelocityValue (string stringVelocity)
@@ -188,10 +232,14 @@ public class GramophoneDevice : MonoBehaviour {
 	}
 	
 	public float GetSystime()
-	{
-            
+	{    
 		return systemTime;
 	}
+
+    public float GetTreadmillPorts()
+    {
+        return treadmillPorts;
+    }
 
     void Awake()
     {
@@ -216,7 +264,7 @@ public class GramophoneDevice : MonoBehaviour {
             if(value == "") return;
             string[] lines;
             lines = value.Split(stringSeparators, System.StringSplitOptions.None);
-             var line = lines[lines.Length - 2];
+            var line = lines[lines.Length - 2];
             string[] words;
             words = line.Split(' ');
 			if (words.Length == 4)
@@ -227,6 +275,14 @@ public class GramophoneDevice : MonoBehaviour {
 				inputVal2 = float.Parse (words [3]);
 				
 			}
+            if (words.Length == 10)
+            {
+                systemTime = float.Parse(words[0]);
+                inputVal = float.Parse(words[1]);
+                velocity = float.Parse(words[1]);
+                inputVal2 = float.Parse(words[6]);
+                treadmillPorts = float.Parse(words[8]);
+            }
 
         }
 		

@@ -2526,8 +2526,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1919137437}
-  teleportationTarget: {fileID: 0}
-  telemetry: {fileID: 0}
   timer: 4
   timerPufftime: 4
   velocity: 0
@@ -5599,7 +5597,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: PuffTrack
+      value: 
+      objectReference: {fileID: 964720869}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: RewardZone
+      value: 
+      objectReference: {fileID: 1859836654}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: RewardTrack
       value: 
       objectReference: {fileID: 1859836654}
     - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}

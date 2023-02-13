@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class puff : MonoBehaviour {
 
     public GameObject Player;
-    public GameObject teleportationTarget;
-	public Text telemetry;
+    //public GameObject teleportationTarget;
+	//public Text telemetry;
     public float timer;
 	public float timerPufftime;
 	public float velocity;
@@ -19,6 +19,7 @@ public class puff : MonoBehaviour {
     bool reduce2 = false;
     bool phasorReduce = false;
     private GramophoneDevice device;
+    bool puffed = false;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class puff : MonoBehaviour {
 		
 	public void inputPuffValue (string stringTimer)
 	{
-	    timerPufftime = puffTime;
+        timerPufftime = puffTime;
 		timer = timerPufftime;
 	}
 		
@@ -54,9 +55,18 @@ public class puff : MonoBehaviour {
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            reduce = true;
+            reduce2 = true;
+        }
+    }
+
     void Update()
-    { 
-            phasorTimer -= Time.deltaTime;
+    {
+        phasorTimer -= Time.deltaTime;
 
         if (phasorTimer <= 0)
         {
@@ -104,6 +114,13 @@ public class puff : MonoBehaviour {
                 (Player.GetComponent<PositionTracking>().VelocityIntegral() < 3)))*/
             {
                 Puff ();
+                puffed = true;
+
+            }
+            else if ((Player.GetComponent<PositionTracking>().VelocityIntegral() > 3) && puffed == true)
+            {
+                Player.GetComponent<PositionTracking>().TeleportAfterPuff();
+                puffed = false;
             }
             else
             {
@@ -111,8 +128,8 @@ public class puff : MonoBehaviour {
 			}
         }
 
-		telemetry.text = timer+";";
-		telemetry.color = Color.red;
+		//telemetry.text = timer+";";
+		//telemetry.color = Color.red;
     }
 
     void Puff()
@@ -131,14 +148,24 @@ public class puff : MonoBehaviour {
 		//device.CloseA ();
 
         Player.GetComponent<PositionTracking>().PuffHappens();
+
     }
 	void AntiPuff()
     {
 		device.CloseA ();
-	}
+        //Player.GetComponent<PositionTracking>().antiPuff = 1;
+    }
 
     void PuffZone()
     {
         Player.GetComponent<PositionTracking>().PuffZone();
+    }
+
+    public void PuffReset()
+    {
+        reduce = false;
+        reduce2 = false;
+        timer = timerPufftime;
+        AntiPuff();
     }
 }

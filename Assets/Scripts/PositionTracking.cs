@@ -57,9 +57,10 @@ public class PositionTracking : MonoBehaviour
 	private bool blackZone = false; //0, if not in black zone, else 1
 	private bool cloudZone = false; //0, if not in cloud zone, else 1
 	private bool mismatchZone = false; //0, if not in mismatch zone, else 1
-	public GameObject RewardZone;
-	[HideInInspector] public bool puffHappened = false; //logs 1 if puff occurs, else 0
-	[HideInInspector] public bool rewardHappened = false; //logs 1 if reward occurs, else 0
+	public GameObject RewardTrack;
+    public GameObject PuffTrack;
+    [HideInInspector] public bool puffHappened = false; //logs 1 if puff occurs, else 0
+    [HideInInspector] public bool rewardHappened = false; //logs 1 if reward occurs, else 0
 	public DateTime localDate = DateTime.Now;
 	private Vector3 startPosition;
 	public bool sliding = false; //logs 1 if sliding occurs, else 0
@@ -86,7 +87,7 @@ public class PositionTracking : MonoBehaviour
         //}
         string clean = Regex.Replace(localDate + ";", @"[. :;]", "");
         writer = new StreamWriter(clean + "training" + ".csv", append: false);
-        writer.WriteLine("time;position;velocity;aversive;left;right;black;cloud;mismatch;teleport;port_A;port_B;port_C;Trigger;Input2;lickLock;Lick;lickDelta;Systime;");
+        writer.WriteLine("time;position;velocity;aversive;left;right;black;cloud;mismatch;teleport;port_A;port_B;port_C;Trigger;Input2;lickLock;Lick;lickDelta;Systime;TreadmillPorts;");
         probability8 = 100 - (probability1 + probability2 + probability3 + probability4 + probability5 + probability6 + probability7);
         scene = SceneManager.GetActiveScene();
 	}
@@ -283,66 +284,36 @@ public class PositionTracking : MonoBehaviour
 
 
 
-	//public void TeleportToDefined()
-	//{
-	//	if (velocityDepend == true)
-	//	{
-	//		if (VelocityIntegral() < 1)
-	//		{
-	//			teleportTimer += Time.deltaTime;
-	//		}
-	//		else
-	//		{
-	//			teleportTimer = 0;
-	//		}
+    public void TeleportToTarget()
+    {
+        if (velocityDepend == true)
+        {
+            if ((VelocityIntegral() < 1))
+            {
+                teleportTimer += Time.deltaTime;
+            }
+            else
+            {
+                teleportTimer = 0;
+            }
 
-	//	}
-	//	else
-	//	{
-	//		teleportTimer += Time.deltaTime;
-	//	}
+        }
+        else
+        {
+            teleportTimer += Time.deltaTime;
 
-	//	if (teleportTimer >= teleportDelta)
-	//	{
-	//		Player.transform.position = teleportationTarget1.transform.position;
-	//		teleportEvent = true;
-	//		sliding = true;
-	//		startPosition = Player.transform.position;
-	//		teleportTimer = 0;
-	//		speed = slidingSpeed;
-	//	}
-	//}
+            if (scene.name == "Punishment" || scene.name == "Reverse Punishment")
+            {
+                if (VelocityIntegral() > 10)
+                {
+                    moveTime = 0;
+                }
+                else
+                {
+                    moveTime += Time.deltaTime;
+                }
 
-	public void TeleportToTarget()
-	{
-		if (velocityDepend == true)
-		{
-			if ((VelocityIntegral() < 1))
-			{
-				teleportTimer += Time.deltaTime;
-			}
-			else
-			{
-				teleportTimer = 0;
-			}
-
-		}
-		else
-		{
-			teleportTimer += Time.deltaTime;
-
-			if (scene.name == "Punishment" || scene.name == "Reverse Punishment")
-			{
-				if (VelocityIntegral() > 10)
-				{
-					moveTime = 0;
-				}
-				else
-				{
-					moveTime += Time.deltaTime;
-				}
-
-			}
+            }
             if (scene.name == "Reward")
             {
                 lickTime += Time.deltaTime;
@@ -350,55 +321,103 @@ public class PositionTracking : MonoBehaviour
 
         }
 
-		rng = GetRandomValue();
-		if (scene.name == "Reward" && lickTime >= teleportAfterLick) rewardScene = true;
-		if (scene.name == "Punishment" && moveTime >= teleportAfterNoMove) punishmentScene = true;
+        rng = GetRandomValue();
+        if (scene.name == "Reward" && lickTime >= teleportAfterLick) rewardScene = true;
+        if (scene.name == "Punishment" && moveTime >= teleportAfterNoMove) punishmentScene = true;
         if (scene.name == "Reverse Punishment" && moveTime >= teleportAfterNoMove) reversePunishmentScene = true;
         if (teleportTimer >= teleportDelta && (rewardScene || punishmentScene || reversePunishmentScene))
-		{
+        {
             switch (rng)
-			{
-				case 1:
-					Player.transform.position = teleportationTarget1.transform.position;
-					break;
-
-				case 2:
-					Player.transform.position = teleportationTarget2.transform.position;
+            {
+                case 1:
+                    Player.transform.position = teleportationTarget1.transform.position;
                     break;
 
-				case 3:
-					Player.transform.position = teleportationTarget3.transform.position;
-					break;
+                case 2:
+                    Player.transform.position = teleportationTarget2.transform.position;
+                    break;
 
-				case 4:
-					Player.transform.position = teleportationTarget4.transform.position;
-					break;
+                case 3:
+                    Player.transform.position = teleportationTarget3.transform.position;
+                    break;
 
-				case 5:
-					Player.transform.position = teleportationTarget5.transform.position;
-					break;
+                case 4:
+                    Player.transform.position = teleportationTarget4.transform.position;
+                    break;
 
-				case 6:
-					Player.transform.position = teleportationTarget6.transform.position;
-					break;
+                case 5:
+                    Player.transform.position = teleportationTarget5.transform.position;
+                    break;
 
-				case 7:
-					Player.transform.position = teleportationTarget7.transform.position;
-					break;
+                case 6:
+                    Player.transform.position = teleportationTarget6.transform.position;
+                    break;
 
-				case 8:
-					Player.transform.position = teleportationTarget8.transform.position;
-					break;
-			}
-            if (rewardScene || punishmentScene || reversePunishmentScene) RewardZone.GetComponent<waterRewardOblique>().RewardReset();
+                case 7:
+                    Player.transform.position = teleportationTarget7.transform.position;
+                    break;
+
+                case 8:
+                    Player.transform.position = teleportationTarget8.transform.position;
+                    break;
+            }
+            if (rewardScene || punishmentScene || reversePunishmentScene) RewardTrack.GetComponent<waterRewardOblique>().RewardReset();
+            if (rewardScene || punishmentScene || reversePunishmentScene) PuffTrack.GetComponent<puff>().PuffReset();
 
             teleportEvent = true;
-			sliding = true;
-			startPosition = Player.transform.position;
-			teleportTimer = 0;
-			speed = slidingSpeed;
-		}
+            sliding = true;
+            startPosition = Player.transform.position;
+            teleportTimer = 0;
+            speed = slidingSpeed;
+        }
 
+    }
+
+    public void TeleportAfterPuff()
+	{
+        rng = GetRandomValue();
+        switch (rng)
+        {
+            case 1:
+                Player.transform.position = teleportationTarget1.transform.position;
+                break;
+
+            case 2:
+                Player.transform.position = teleportationTarget2.transform.position;
+                break;
+
+            case 3:
+                Player.transform.position = teleportationTarget3.transform.position;
+                break;
+
+            case 4:
+                Player.transform.position = teleportationTarget4.transform.position;
+                break;
+
+            case 5:
+                Player.transform.position = teleportationTarget5.transform.position;
+                break;
+
+            case 6:
+                Player.transform.position = teleportationTarget6.transform.position;
+                break;
+
+            case 7:
+                Player.transform.position = teleportationTarget7.transform.position;
+                break;
+
+            case 8:
+                Player.transform.position = teleportationTarget8.transform.position;
+                break;
+        }
+        if (rewardScene || punishmentScene || reversePunishmentScene) RewardTrack.GetComponent<waterRewardOblique>().RewardReset();
+        if (rewardScene || punishmentScene || reversePunishmentScene) PuffTrack.GetComponent<puff>().PuffReset();
+
+        teleportEvent = true;
+        sliding = true;
+        startPosition = Player.transform.position;
+        teleportTimer = 0;
+        speed = slidingSpeed;
 	}
 
 	public void WritePositionToCSV(GameObject Player)
@@ -438,9 +457,10 @@ public class PositionTracking : MonoBehaviour
 		lickLockInt + ";" +
 		Lick() + ";" +
 		lickDelta + ";" +
-		device.GetSystime();
+		device.GetSystime() + ";" +
+		device.GetTreadmillPorts();
 
-		lickLock = device.GetInputVal2();
+        lickLock = device.GetInputVal2();
 		teleportEvent = false;
         Debug.Log(log);
         writer.WriteLine(log);
