@@ -10,7 +10,7 @@ public class GramophoneDevice : MonoBehaviour {
     SerialPort stream;
     public string Port;
     public InputField velocityInput;
-    public float VelocityScale = 1.0f;
+    public float VelocityScale;
     private static GramophoneDevice instance;
     //gramophoneStart
     float velocity;
@@ -253,6 +253,7 @@ public class GramophoneDevice : MonoBehaviour {
         stream = new SerialPort(Port, 115200);
         stream.Open();
         velocityInput.onEndEdit.AddListener(inputVelocityValue);
+        //if (isTreadmill) VelocityScale = 0.06f;
         Reverse();
 	}
 
@@ -275,11 +276,11 @@ public class GramophoneDevice : MonoBehaviour {
 				inputVal2 = float.Parse (words [3]);
 				
 			}
-            if (words.Length == 10)
+            if (words.Length > 4)
             {
                 systemTime = float.Parse(words[0]);
                 inputVal = float.Parse(words[1]);
-                velocity = float.Parse(words[1]);
+                velocity = float.Parse(words[2]);
                 inputVal2 = float.Parse(words[6]);
                 treadmillPorts = float.Parse(words[8]);
             }
