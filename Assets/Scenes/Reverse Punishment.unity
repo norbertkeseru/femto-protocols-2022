@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2951,7 +2951,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: PuffTrack
+      value: 
+      objectReference: {fileID: 2084004223}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: RewardZone
+      value: 
+      objectReference: {fileID: 1945642532}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: RewardTrack
       value: 
       objectReference: {fileID: 1945642532}
     - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
@@ -5986,8 +5994,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 770272340}
-  teleportationTarget: {fileID: 0}
-  telemetry: {fileID: 0}
   timer: 4
   timerPufftime: 4
   velocity: 0
