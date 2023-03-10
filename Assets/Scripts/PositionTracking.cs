@@ -362,7 +362,7 @@ public class PositionTracking : MonoBehaviour
                     break;
             }
             if (rewardScene || punishmentScene || reversePunishmentScene) RewardTrack.GetComponent<waterRewardOblique>().RewardReset();
-            if (rewardScene || punishmentScene || reversePunishmentScene) PuffTrack.GetComponent<puff>().PuffReset();
+            if (punishmentScene || reversePunishmentScene) PuffTrack.GetComponent<puff>().PuffReset();
 
             teleportEvent = true;
             sliding = true;

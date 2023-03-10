@@ -1223,7 +1223,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1587215349}
   teleportationTarget: {fileID: 679704733}
-  PT: {fileID: 0}
 --- !u!1 &437547988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1333,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1587215349}
   teleportationTarget: {fileID: 2138951035}
-  PT: {fileID: 0}
 --- !u!4 &448488827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6409805444345024656, guid: b5f63238a79a72148b55ee5cf23a83d7, type: 3}
@@ -2582,7 +2580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1587215349}
-  teleportationTarget: {fileID: 597569983}
+  teleportationTarget: {fileID: 0}
   telemetry: {fileID: 0}
   licktreshold: 3
   timer: 4
@@ -2942,6 +2940,7 @@ GameObject:
   - component: {fileID: 984564494}
   - component: {fileID: 984564493}
   - component: {fileID: 984564496}
+  - component: {fileID: 984564497}
   m_Layer: 13
   m_Name: Control_zone
   m_TagString: Untagged
@@ -3040,6 +3039,26 @@ MonoBehaviour:
   Player: {fileID: 1587215349}
   teleportationTarget: {fileID: 597569983}
   telemetry: {fileID: 0}
+--- !u!114 &984564497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984564491}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4a9dfa75878654fbeac2a9893b89ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1587215349}
+  timer: 0
+  timerPufftime: 0
+  velocity: 0
+  puffTime: 0
+  phasor: 0
+  phasorTimer: 0
+  phasorTime: 0
 --- !u!1001 &998895075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3973,7 +3992,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1587215349}
   teleportationTarget: {fileID: 597569983}
-  PT: {fileID: 0}
 --- !u!1001 &1429393821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4273,9 +4291,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: PuffTrack
+      value: 
+      objectReference: {fileID: 984564491}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: RewardZone
       value: 
       objectReference: {fileID: 862880113}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: RewardTrack
+      value: 
+      objectReference: {fileID: 862880113}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: probability1
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
+      propertyPath: probability2
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 5579214642700955135, guid: 019efd0e51b5ca84a93528cd31e03118, type: 3}
       propertyPath: teleportationTarget1
       value: 

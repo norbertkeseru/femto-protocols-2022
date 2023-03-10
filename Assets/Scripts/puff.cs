@@ -152,7 +152,7 @@ public class puff : MonoBehaviour {
     }
 	void AntiPuff()
     {
-		device.CloseA ();
+        device.CloseA();
         //Player.GetComponent<PositionTracking>().antiPuff = 1;
     }
 
