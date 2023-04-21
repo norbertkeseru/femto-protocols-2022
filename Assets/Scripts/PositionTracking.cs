@@ -22,9 +22,9 @@ public class PositionTracking : MonoBehaviour
 	private GramophoneDevice device;
 
 	//teleport stuff
-	public float teleportDelta; //time before teleport, for stationary mouse
+	[SerializeField] public static float teleportDelta; //time before teleport, for stationary mouse
 	public float teleportTimer = 0; //counts up to teleportDelta, then teleport event occurs
-	public bool teleporting; //checkbox, if true, then teleport is enabled
+	[SerializeField] public static bool teleporting; //checkbox, if true, then teleport is enabled
 	public bool velocityDepend; //velocity dependent teleport
 	public GameObject teleportationTarget1; //1. teleportation target
 	public float probability1;
