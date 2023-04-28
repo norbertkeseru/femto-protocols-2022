@@ -17,26 +17,28 @@ public class Környezet : EditorWindow
     void OnGUI()
     {
         //Creates new scene
-        if (GUILayout.Button("New Scene", GUILayout.ExpandWidth(false)))
+        string SceneName = EditorGUILayout.TextField()
+        if (GUILayout.Button("New Scene", GUILayout.Width(90)))
         {
             var newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            EditorSceneManager.SaveScene(newScene, "Assets/Scenes/"+ SceneName + ".unity");
 
         }
     }
 }
 
 
-public class Funkcionalitás : EditorWindow
+public class Functionality : EditorWindow
 {
     string myString = "Hello World";
     bool groupEnabled;
     bool myBool = true;
     float myFloat = 1.23f;
 
-    [MenuItem("Femtonics/Funkcionalitás")]
+    [MenuItem("Femtonics/Functionality")]
     static void Init()
     {
-        Funkcionalitás window = (Funkcionalitás)GetWindow(typeof(Funkcionalitás));
+        Functionality window = (Functionality)GetWindow(typeof(Functionality));
         window.Show();
     }
 
